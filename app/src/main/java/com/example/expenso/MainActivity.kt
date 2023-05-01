@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
     var client = OkHttpClient()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        getResponse("j")
+        setContentView(R.layout.fragment_chat)
+
     }
 
 

@@ -28,5 +28,7 @@
     <string name="edit">edit</string>
     <string name="delete">Delete</string>
     <string name="transaction_details">Expenses Type</string>
+    <string name="noTect">" "</string>
+    <string name="type_message">Type message</string>
 
 </resources>
