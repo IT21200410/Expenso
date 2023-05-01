@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Expenso</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <string name="new_transaction">New Transaction</string>
+    <string name="back">Back</string>
+    <string name="category">Category</string>
+    <string name="food">Food</string>
+    <string name="shopping">Shopping</string>
+    <string name="transport">Transport</string>
+    <string name="health">Health</string>
+    <string name="other">Other</string>
+    <string name="education">Education</string>
+    <string name="amount">Amount</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="note">Note</string>
+    <string name="details">Details</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="add_few_details_before_you_continue">Add Few details before You Continue…</string>
+    <string name="monthly_budget">Monthly Budget</string>
+    <string name="next">NEXT</string>
+    <string name="yearly">Yearly</string>
+    <string name="edit">edit</string>
+    <string name="delete">Delete</string>
+    <string name="transaction_details">Transaction Details</string>
+
 </resources>
