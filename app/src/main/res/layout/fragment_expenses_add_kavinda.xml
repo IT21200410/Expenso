@@ -7,6 +7,12 @@
     android:background="@color/white"
     tools:context=".expenses_add_kavinda">
 
+    <include
+        layout="@layout/dashboardtoolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
