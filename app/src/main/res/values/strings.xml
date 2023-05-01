@@ -25,6 +25,6 @@
     <string name="yearly">Yearly</string>
     <string name="edit">edit</string>
     <string name="delete">Delete</string>
-    <string name="transaction_details">Transaction Details</string>
+    <string name="transaction_details">Expenses Type</string>
 
 </resources>
