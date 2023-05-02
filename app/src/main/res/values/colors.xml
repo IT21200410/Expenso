@@ -9,10 +9,18 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
-    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="lightBlue">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
     <color name="chat_gradient_start">#667eea</color>
     <color name="chat_gradient_end">#764ba2</color>
+    <color name="background_deep">#EFEFEF</color>
+    <color name="textPrimary">#44475B</color>
+    <color name="green">#00D09C</color>
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="background">#F6F6F7</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="textSecondary">#575A6C</color>
+
 
 </resources>

@@ -3,7 +3,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
-----------------Add Transaction----------------
+    ----------------Add Transaction----------------
     <string name="new_transaction">New Transaction</string>
     <string name="back">Back</string>
     <string name="category">Category</string>
@@ -20,7 +20,7 @@
     <string name="add_transaction">Add Transaction</string>
     <string name="amount">Amount</string>
     --------------- Add Expenses----------------------
-   <string name="expenses">Expenses Type</string>
+    <string name="expenses">Expenses Type</string>
     <string name="add_expenses">Add Expenses</string>
     <string name="transaction_details">Expenses Type</string>
 
@@ -32,7 +32,7 @@
     <string name="edit">edit</string>
     <string name="delete">Delete</string>
 
------------------------Backup-----------------------------------
+    -----------------------Backup-----------------------------------
     <string name="drive_backup">Data Backup</string>
     <string name="last_backup">Last Backup</string>
     <string name="back_up_your_data_to_google_drive_you_can_restore_them_when_you_reinstall_buckoid_app_and_signin_with_google_account">Back up your data to Google Drive. You can restore them when you reinstall Buckoid App and signin with Google Account.</string>
@@ -40,5 +40,41 @@
     <string name="google_drive_setting">Google Drive Setting</string>
     <string name="transaction_details_backed_up_in_google_drive_are_not_protected_by_buckoid_end_to_end_encryption">Transaction details backed up in Google Drive are not protected by Buckoid end-to-end encryption.</string>
     <string name="google_account">Google Account</string>
+
+    -----------------user profile------------------------
+    <string name="yearly_budget">Yearly Budget</string>
+    <string name="settings">Settings</string>
+    <string name="darkmode">DarkMode</string>
+    <string name="fingerprint_protection">Fingerprint Lock</string>
+    <string name="backup_data">Backup Data</string>
+    <string name="share_to_friends">Share to Friends</string>
+    <string name="about_us">About Us</string>
+    <string name="rate_us_on_appstore">Rate us On AppStore</string>
+
+    --------------dashboard_transaction---------------------
+    <string name="all">All</string>
+    <string name="monthly">Monthly</string>
+    <string name="Managing">Managing Transactions</string>
+    <string name="all_transactions">All Transactions</string>
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+    <string name="icon">Icon</string>
+    <string name="your_reminders">Your Reminders</string>
+    <string name="total_income">Total Income</string>
+    <string name="total_expenses">Total Expenses</string>
+    <string name="your_expenses">Your Expenses</string>
+    <string name="upcomming">Upcomming Bills</string>
+    <string name="settled">Settled Bills</string>
+
 
 </resources>

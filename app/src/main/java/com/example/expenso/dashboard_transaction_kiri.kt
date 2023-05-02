@@ -10,13 +10,13 @@ import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.expenso.databinding.FragmentAddTransactionKiriBinding
+import com.example.expenso.databinding.FragmentDashboardTransactionKiriBinding
 
 /**
  * An example full-screen fragment that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class add_transaction_kiri : Fragment() {
+class dashboard_transaction_kiri : Fragment() {
     private val hideHandler = Handler(Looper.myLooper()!!)
 
     @Suppress("InlinedApi")
@@ -59,7 +59,7 @@ class add_transaction_kiri : Fragment() {
     private var fullscreenContent: View? = null
     private var fullscreenContentControls: View? = null
 
-    private var _binding: FragmentAddTransactionKiriBinding? = null
+    private var _binding: FragmentDashboardTransactionKiriBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -71,7 +71,7 @@ class add_transaction_kiri : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentAddTransactionKiriBinding.inflate(inflater, container, false)
+        _binding = FragmentDashboardTransactionKiriBinding.inflate(inflater, container, false)
         return binding.root
 
     }
