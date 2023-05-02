@@ -3,7 +3,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
-
+----------------Add Transaction----------------
     <string name="new_transaction">New Transaction</string>
     <string name="back">Back</string>
     <string name="category">Category</string>
@@ -13,18 +13,32 @@
     <string name="health">Health</string>
     <string name="other">Other</string>
     <string name="education">Education</string>
-    <string name="amount">Amount</string>
     <string name="title">Title</string>
     <string name="date">Date</string>
     <string name="note">Note</string>
     <string name="details">Details</string>
     <string name="add_transaction">Add Transaction</string>
+    <string name="amount">Amount</string>
+    --------------- Add Expenses----------------------
+   <string name="expenses">Expenses Type</string>
+    <string name="add_expenses">Add Expenses</string>
+    <string name="transaction_details">Expenses Type</string>
+
+    ------------Transaction User Details--------------------
     <string name="add_few_details_before_you_continue">Add Few details before You Continue…</string>
     <string name="monthly_budget">Monthly Budget</string>
     <string name="next">NEXT</string>
     <string name="yearly">Yearly</string>
     <string name="edit">edit</string>
     <string name="delete">Delete</string>
-    <string name="transaction_details">Expenses Type</string>
+
+-----------------------Backup-----------------------------------
+    <string name="drive_backup">Data Backup</string>
+    <string name="last_backup">Last Backup</string>
+    <string name="back_up_your_data_to_google_drive_you_can_restore_them_when_you_reinstall_buckoid_app_and_signin_with_google_account">Back up your data to Google Drive. You can restore them when you reinstall Buckoid App and signin with Google Account.</string>
+    <string name="we_strongly_recommend_that_you_take_backup_regularly_from_the_app_as_backup_to_google_drive_is_not_automatic_doing_so_would_keep_your_data_safe_even_if_your_device_is_lost_damaged">We strongly recommend that you take backup regularly from the app (as backup to Google Drive is not automatic). Doing so would keep your data safe even if your device is lost/damaged.</string>
+    <string name="google_drive_setting">Google Drive Setting</string>
+    <string name="transaction_details_backed_up_in_google_drive_are_not_protected_by_buckoid_end_to_end_encryption">Transaction details backed up in Google Drive are not protected by Buckoid end-to-end encryption.</string>
+    <string name="google_account">Google Account</string>
 
 </resources>

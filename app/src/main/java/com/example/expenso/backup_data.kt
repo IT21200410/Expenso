@@ -10,14 +10,15 @@ import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.expenso.databinding.FragmentAddTransactionKiriBinding
+import com.example.expenso.databinding.FragmentBackupDataBinding
 
 /**
  * An example full-screen fragment that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class add_transaction_kiri : Fragment() {
+class backup_data : Fragment() {
     private val hideHandler = Handler(Looper.myLooper()!!)
+
     @Suppress("InlinedApi")
     private val hidePart2Runnable = Runnable {
         // Delayed removal of status and navigation bar
@@ -41,6 +42,7 @@ class add_transaction_kiri : Fragment() {
     }
     private var visible: Boolean = false
     private val hideRunnable = Runnable { hide() }
+
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
@@ -57,7 +59,8 @@ class add_transaction_kiri : Fragment() {
     private var fullscreenContent: View? = null
     private var fullscreenContentControls: View? = null
 
-private var _binding: FragmentAddTransactionKiriBinding? = null
+    private var _binding: FragmentBackupDataBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -68,8 +71,8 @@ private var _binding: FragmentAddTransactionKiriBinding? = null
         savedInstanceState: Bundle?
     ): View? {
 
-      _binding = FragmentAddTransactionKiriBinding.inflate(inflater, container, false)
-      return binding.root
+        _binding = FragmentBackupDataBinding.inflate(inflater, container, false)
+        return binding.root
 
     }
 
@@ -77,6 +80,7 @@ private var _binding: FragmentAddTransactionKiriBinding? = null
         super.onViewCreated(view, savedInstanceState)
 
         visible = true
+
 
         // Set up the user interaction to manually show or hide the system UI.
         fullscreenContent?.setOnClickListener { toggle() }
@@ -174,7 +178,7 @@ private var _binding: FragmentAddTransactionKiriBinding? = null
         private const val UI_ANIMATION_DELAY = 300
     }
 
-override fun onDestroyView() {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
