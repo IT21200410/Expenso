@@ -75,6 +75,11 @@
     <string name="your_expenses">Your Expenses</string>
     <string name="upcomming">Upcomming Bills</string>
     <string name="settled">Settled Bills</string>
+    <string name="chat">chat</string>
+    <string name="type_message">type_message</string>
+    <string name="noTect">noTect</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 
 </resources>
