@@ -1,6 +1,7 @@
 package com.example.expenso
 
 import android.app.ActionBar
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -41,7 +42,11 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
 
-                R.id.nav_settings -> Toast.makeText(applicationContext, "Clicked Settings", Toast.LENGTH_SHORT).show()
+                R.id.nav_settings -> {
+                    startActivity(Intent(this, chat::class.java))
+                    finish()
+                }
+                R.id.nav_chat -> Toast.makeText(applicationContext, "Clicked Chat", Toast.LENGTH_SHORT).show()
             }
 
             true
