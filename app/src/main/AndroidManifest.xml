@@ -15,8 +15,14 @@
         android:theme="@style/Theme.Expenso"
         tools:targetApi="31">
         <activity
+            android:name=".add_profile"
+            android:exported="false" />
+        <activity
+            android:name=".addExpenses"
+            android:exported="false" />
+        <activity
             android:name=".expensoSplash"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +32,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Expenso2">
-        </activity>
+            android:theme="@style/Theme.Expenso2" />
     </application>
 
 </manifest>
