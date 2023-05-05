@@ -80,6 +80,7 @@
     <string name="noTect">noTect</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="type">Type</string>
 
 
 </resources>

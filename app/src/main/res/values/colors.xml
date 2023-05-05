@@ -21,6 +21,8 @@
     <color name="background">#F6F6F7</color>
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="textSecondary">#575A6C</color>
+    <color name="cardColor">#E2D0B4FF</color>
+    <color name="colorControlActivated"></color>
 
 
 </resources>

@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_background))
+        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_background))
 
         val drawerLayout:DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
@@ -47,6 +47,11 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.nav_chat -> Toast.makeText(applicationContext, "Clicked Chat", Toast.LENGTH_SHORT).show()
+                R.id.nav_expense ->  {
+                    startActivity(Intent(this, AddExpense::class.java))
+                    finish()
+                }
+
             }
 
             true
