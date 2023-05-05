@@ -84,6 +84,12 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="type">Type</string>
+    <string name="err_date">Please enter date</string>
+    <string name="err_type">Select expense type</string>
+    <string name="err_amount">Enter Amount</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="transactions">Transactions</string>
+    <string name="reminders">Reminders</string>
 
 
 </resources>

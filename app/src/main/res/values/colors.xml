@@ -24,5 +24,8 @@
     <color name="cardColor">#E2D0B4FF</color>
     <color name="colorControlActivated"></color>
 
+    <color name="colorSnackBarSuccess">#8BC34A</color>
+    <color name="colorSnackBarError">#F72400</color>
+
 
 </resources>
