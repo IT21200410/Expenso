@@ -21,8 +21,10 @@
     <string name="amount">Amount</string>
     --------------- Add Expenses----------------------
     <string name="expenses">Expenses Type</string>
-    <string name="add_expenses">Add Expenses</string>
+
     <string name="transaction_details">Expenses Type</string>
+    <string name="Btn_expen">Add Expenses</string>
+
 
     ------------Transaction User Details--------------------
     <string name="add_few_details_before_you_continue">Add Few details before You Continue…</string>
@@ -50,6 +52,7 @@
     <string name="share_to_friends">Share to Friends</string>
     <string name="about_us">About Us</string>
     <string name="rate_us_on_appstore">Rate us On AppStore</string>
+    <string name="Btn_add">Add Profile</string>
 
     --------------dashboard_transaction---------------------
     <string name="all">All</string>
