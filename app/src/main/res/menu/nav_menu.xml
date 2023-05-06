@@ -4,13 +4,32 @@
     tools:showIn = "navigation_view">
 
     <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="@string/dashboard"/>
+
+    <item
+        android:id="@+id/nav_transactions"
+        android:icon="@drawable/ic_transaction"
+        android:title="@string/transactions"/>
+
+    <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/baseline_settings_24"
-        android:title="Settings"/>
+        android:title="@string/settings"/>
 
     <item
         android:id="@+id/nav_chat"
         android:icon="@drawable/baseline_chat_24"
-        android:title="Chat"/>
+        android:title="@string/chat"/>
+
+    <item
+        android:id="@+id/nav_expense"
+        android:title="@string/expenses"/>
+
+    <item
+        android:id="@+id/nav_reminders"
+        android:title="@string/reminders"
+        android:icon="@drawable/ic_books"/>
 
 </menu>

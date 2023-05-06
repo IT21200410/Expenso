@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "773737100594",
+    "project_id": "expenso-5528c",
+    "storage_bucket": "expenso-5528c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773737100594:android:81e9f48fe0de45d315932b",
+        "android_client_info": {
+          "package_name": "com.example.expenso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773737100594-pi2sgatqbi9isud0u9f7rui7vqoru6i9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.expenso",
+            "certificate_hash": "994fdc775843788b8a035ac1d7f81d734b85f68f"
+          }
+        },
+        {
+          "client_id": "773737100594-j1f9k5iot5cggsmmrenocnacbnkd3166.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKjutYNWpOuyhrdgg4BFEURfsArVBpMCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773737100594-j1f9k5iot5cggsmmrenocnacbnkd3166.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
