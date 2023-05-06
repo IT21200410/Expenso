@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".chat">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        >
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/dashboardtoolbarexpenses"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="579dp"
+            android:layout_above="@id/bottom_layout"
+
+            android:layout_below="@+id/include"
+            android:layout_marginTop="0dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:padding="8dp"
+            android:id="@+id/bottom_layout">
+
+            <EditText
+                android:id="@+id/message_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@id/send_btn"
+                android:background="@drawable/round_edge"
+                android:backgroundTint="#C9B9E8"
+                android:hint="Talk to Chat "
+                android:padding="16dp" />
+
+            <ImageButton
+                android:id="@+id/send_btn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="10dp"
+
+                android:background="@color/chat_gradient_end"
+                android:backgroundTint="#4759CA"
+                android:padding="8dp"
+                android:src="@drawable/send"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

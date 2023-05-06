@@ -15,6 +15,10 @@
         android:theme="@style/Theme.Expenso"
         tools:targetApi="31">
         <activity
+            android:name=".chat"
+            android:exported="false" />
+
+        <activity
             android:name=".Display_Transactions"
             android:exported="false" />
         <activity
@@ -29,11 +33,11 @@
         <activity
             android:name=".AddExpense"
             android:exported="false"
-            android:theme="@style/Theme.Expenso2"></activity>
+            android:theme="@style/Theme.Expenso2" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Expenso2"></activity>
+            android:theme="@style/Theme.Expenso2" />
     </application>
 
 </manifest>

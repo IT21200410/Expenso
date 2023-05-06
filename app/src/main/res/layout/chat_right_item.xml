@@ -1,43 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="end"
+    android:padding="8dp">
 
-    <RelativeLayout
-        android:id="@+id/btnconti"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="7dp">
+        android:background="@drawable/round_edge"
+        android:padding="8dp">
 
         <TextView
-            android:id="@+id/show_message"
+            android:id="@+id/right_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="7dp"
-            android:layout_toLeftOf="@+id/sendbtn"
-            android:background="@drawable/round_edge"
-            android:paddingLeft="7dp"
-            android:paddingTop="10dp"
-            android:paddingRight="7dp"
-            android:paddingBottom="10dp"
-            android:text="Solve Your queries with smartbot"
             android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/sendbtn"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:padding="2dp"
-            android:src="@drawable/account"
-            app:tint="@color/black" />
-    </RelativeLayout>
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
