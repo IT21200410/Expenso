@@ -15,13 +15,7 @@
         android:theme="@style/Theme.Expenso"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EditTransaction"
+            android:name=".add_profile"
             android:exported="false" />
         <activity
             android:name=".Display_Transactions"

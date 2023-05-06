@@ -31,4 +31,8 @@
     <color name="colorSnackBarError">#F72400</color>
 
 
+    <color name="primary">#1B023B</color>
+    <color name="secondary">#FF03DAC5</color>
+
+
 </resources>
