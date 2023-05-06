@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, AddExpense::class.java))
                     finish()
                 }
+                R.id.nav_reminders -> {
+                    startActivity(Intent(this, Display_Transactions::class.java))
+                    finish()
+                }
 
             }
 
