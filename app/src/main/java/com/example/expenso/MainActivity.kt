@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.nav_chat -> {
-                    Toast.makeText(applicationContext, "Clicked Chat", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, chat::class.java))
                 }
                 R.id.nav_expense ->  {
                     startActivity(Intent(this, AddExpense::class.java))
