@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.nav_settings -> {
-                    startActivity(Intent(this, chat::class.java))
+                    startActivity(Intent(this, Setting::class.java))
                     finish()
                 }
                 R.id.nav_chat -> {
