@@ -5,10 +5,13 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.example.expenso.databinding.ActivityLoginBinding
+import com.example.expenso.firestore.FireStoreClass
+import com.example.expenso.models.User
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
@@ -51,6 +54,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 binding?.tvRegister?.setOnClickListener {
                     val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 }
             }
@@ -84,18 +88,30 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener{
                     task ->
-                    hideProgressDialog()
 
                     if(task.isSuccessful)
                     {
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
+                        FireStoreClass().getUserDetails(this)
                     }
                     else
                     {
+                        hideProgressDialog()
                         showErrorSnackBar(task.exception!!.message.toString(), true)
                     }
                 }
         }
     }
+
+    fun userLoggedInSuccess(user: User)
+    {
+        hideProgressDialog()
+
+        Log.i("First Name: ", user.firstName)
+        Log.i("Last Name: ", user.lastName)
+        Log.i("Email: ", user.email)
+
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        finish()
+    }
+
 }

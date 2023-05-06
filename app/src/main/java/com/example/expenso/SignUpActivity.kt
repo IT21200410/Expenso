@@ -5,10 +5,14 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.CheckBox
+import android.widget.Toast
 import com.example.expenso.databinding.ActivitySignUpBinding
+import com.example.expenso.firestore.FireStoreClass
+import com.example.expenso.models.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -100,7 +104,6 @@ class SignUpActivity : BaseActivity() {
             }
 
             else -> {
-                showErrorSnackBar("Your details are valid", false)
                 true
             }
 
@@ -119,14 +122,27 @@ class SignUpActivity : BaseActivity() {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
                     OnCompleteListener<AuthResult> { task ->
-                        hideProgressDialog()
+
                         if (task.isSuccessful)
                         {
                             val firebaseUser: FirebaseUser = task.result!!.user!!
                             showErrorSnackBar("You are registered successfully. Your user id ${firebaseUser.uid}", true)
 
-                            FirebaseAuth.getInstance().signOut()
+                            val user = User(
+                                firebaseUser.uid,
+                                binding?.etFirstName?.text.toString().trim { it <= ' '},
+                                binding?.etLastName?.text.toString().trim { it <= ' '},
+                                binding?.etEmail?.text.toString().trim{ it <= ' '}
+                            )
+
+                            FireStoreClass().registerUser(this@SignUpActivity, user)
+
+//                            FirebaseAuth.getInstance().signOut()
+//                            finish()
+
+                            startActivity(Intent(this, LoginActivity::class.java))
                             finish()
+
                         }
                         else
                         {
@@ -135,5 +151,14 @@ class SignUpActivity : BaseActivity() {
                     }
                 )
         }
+    }
+
+    fun userRegistrationSuccess(){
+        hideProgressDialog()
+        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+    }
+
+    fun userRegistrationFail(){
+        Toast.makeText(this, "Registration was not successful", Toast.LENGTH_SHORT).show()
     }
 }

@@ -3,6 +3,7 @@ package com.example.expenso
 import android.app.ActionBar
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
@@ -41,19 +42,22 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
+                R.id.nav_dashboard -> {
+                    false
+                }
                 R.id.nav_transactions -> {
                     startActivity(Intent(this, Display_Transactions::class.java))
                     finish()
                 }
                 R.id.nav_settings -> {
-                    startActivity(Intent(this, Setting::class.java))
+                    startActivity(Intent(this, Settings::class.java))
                     finish()
                 }
                 R.id.nav_chat -> {
                     startActivity(Intent(this, chat::class.java))
                 }
-                R.id.nav_expense ->  {
-                    startActivity(Intent(this, AddExpense::class.java))
+                R.id.nav_reminders -> {
+                    startActivity(Intent(this, Display_Transactions::class.java))
                     finish()
                 }
                 R.id.nav_reminders -> {

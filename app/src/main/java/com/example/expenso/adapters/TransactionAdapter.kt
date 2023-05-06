@@ -2,13 +2,11 @@ package com.example.expenso.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expenso.EditTransaction
 import com.example.expenso.R
@@ -37,16 +35,26 @@ class TransactionAdapter(private val context: Context, private val transactionLi
 
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         val transaction = transactionList[position]
+        val amount = transaction.amount.toString()
         holder.tv1.text = transaction.expenseType
-        holder.tv2.text = transaction.amount.toString()
+        holder.tv2.text = "$${amount}"
         holder.tv3.text = transaction.date
 
         holder.card.setOnClickListener {
             val intent = Intent(context,EditTransaction::class.java)
+            intent.putExtra("transaction", transaction)
             context.startActivity(intent)
         }
     }
 
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if(toggle.onOptionsItemSelected(item))
+//        {
+//            return true
+//        }
+//
+//        return super.onOptionsItemSelected(item)
+//    }
 
 }
 

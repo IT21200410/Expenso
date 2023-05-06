@@ -22,11 +22,6 @@
         android:id="@+id/nav_chat"
         android:icon="@drawable/baseline_chat_24"
         android:title="@string/chat"/>
-
-    <item
-        android:id="@+id/nav_expense"
-        android:title="@string/expenses"/>
-
     <item
         android:id="@+id/nav_reminders"
         android:title="@string/reminders"
