@@ -24,9 +24,6 @@
             android:name=".EditTransaction"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".Display_Transactions"
             android:exported="false" />
         <activity
