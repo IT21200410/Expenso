@@ -14,7 +14,6 @@ class FireStoreClass {
         val transactionData = mFireStore.collection("userTransactions")
             .document("1").collection("transactions")
 
-
         transactionData.add(transaction)
             .addOnSuccessListener {
                 activity.transactionSuccess()

@@ -28,7 +28,7 @@ class expensoSplash : AppCompatActivity() {
         @Suppress("DEPRECATION")
         Handler().postDelayed(
             {
-                startActivity(Intent(this@expensoSplash, MainActivity::class.java))
+                startActivity(Intent(this@expensoSplash, LoginActivity::class.java))
                 finish()
             },
             2500

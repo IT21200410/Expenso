@@ -24,8 +24,15 @@
     <color name="cardColor">#E2D0B4FF</color>
     <color name="colorControlActivated"></color>
 
+    <color name="colorPrimaryText">#222934</color>
+    <color name="colorSecondaryText">#989898</color>
+
     <color name="colorSnackBarSuccess">#8BC34A</color>
     <color name="colorSnackBarError">#F72400</color>
+
+
+    <color name="primary">#1B023B</color>
+    <color name="secondary">#FF03DAC5</color>
 
 
 </resources>

@@ -3,6 +3,35 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
+    ----------------Login and SignUp ------------------
+    <string name="content_description">image</string>
+    <string name="title_login">LOGIN</string>
+    <string name="et_hint_email_id">Email ID</string>
+    <string name="et_hint_password">Password</string>
+    <string name="lbl_forgot_password">Forgot Password</string>
+    <string name="btn_lbl_login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register"><u>Register</u></string>
+
+
+    <string name="create">Create an account</string>
+    <string name="hint_last_name">Last name</string>
+    <string name="hint_first_name">First name</string>
+    <string name="et_hint_confirm_password">Confirm Password</string>
+    <string name="btn_lbl_register">Register</string>
+
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login"><u>Login</u></string>
+
+    <string name="err_msg_enter_first_name">Please enter first name.</string>
+    <string name="err_msg_enter_last_name">Please enter last name.</string>
+    <string name="err_msg_enter_email">Please enter email.</string>
+    <string name="err_msg_enter_password">Please enter password.</string>
+    <string name="err_msg_enter_confirm_password">Please enter confirm password.</string>
+    <string name="err_msg_password_and_confirm_password_mismatch">Password and confirm password does not match.</string>
+
+    <string name = "please_wait" >Please Wait ...</string>
+
     ----------------Add Transaction----------------
     <string name="new_transaction">New Transaction</string>
     <string name="back">Back</string>
@@ -46,12 +75,12 @@
     -----------------user profile------------------------
     <string name="yearly_budget">Yearly Budget</string>
     <string name="settings">Settings</string>
-    <string name="darkmode">DarkMode</string>
-    <string name="fingerprint_protection">Fingerprint Lock</string>
+    <string name="language">App Language</string>
+    <string name="currenncy">Currency</string>
     <string name="backup_data">Backup Data</string>
     <string name="share_to_friends">Share to Friends</string>
     <string name="about_us">About Us</string>
-    <string name="rate_us_on_appstore">Rate us On AppStore</string>
+    <string name="expen">Add Expenses</string>
     <string name="Btn_add">Add Profile</string>
 
     --------------dashboard_transaction---------------------
