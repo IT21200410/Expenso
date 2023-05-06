@@ -15,14 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/rec_Image"
-            android:layout_marginStart="20dp"
-            android:padding="8dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_dashboard"/>
 
         <TextView
             android:layout_width="120dp"
@@ -31,7 +23,6 @@
             android:text="Title"
             android:textColor="@color/chat_gradient_start"
             android:textSize="20sp"
-            android:layout_toEndOf="@+id/rec_Image"
             android:layout_marginTop="20dp"
             android:layout_marginStart = "20dp"/>
 
@@ -56,7 +47,6 @@
             android:textColor="@color/chat_gradient_start"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:layout_toEndOf="@+id/rec_Image"
             android:layout_below="@+id/rec_Title"
             android:maxLines="0"
             android:layout_marginStart = "20dp"/>

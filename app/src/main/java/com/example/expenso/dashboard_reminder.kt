@@ -10,13 +10,13 @@ import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.expenso.databinding.FragmentDashboardReminderSudeeraBinding
+import com.example.expenso.databinding.FragmentDashboardReminderBinding
 
 /**
  * An example full-screen fragment that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class dashboard_reminder_sudeera : Fragment() {
+class dashboard_reminder : Fragment() {
     private val hideHandler = Handler(Looper.myLooper()!!)
 
     @Suppress("InlinedApi")
@@ -59,7 +59,7 @@ class dashboard_reminder_sudeera : Fragment() {
     private var fullscreenContent: View? = null
     private var fullscreenContentControls: View? = null
 
-    private var _binding: FragmentDashboardReminderSudeeraBinding? = null
+    private var _binding: FragmentDashboardReminderBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -71,7 +71,7 @@ class dashboard_reminder_sudeera : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentDashboardReminderSudeeraBinding.inflate(inflater, container, false)
+        _binding = FragmentDashboardReminderBinding.inflate(inflater, container, false)
         return binding.root
 
     }
