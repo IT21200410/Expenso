@@ -2,6 +2,8 @@ package com.example.expenso.firestore
 
 import android.widget.Toast
 import com.example.expenso.AddExpense
+import com.example.expenso.add_reminder
+import com.example.expenso.models.Reminder
 import com.example.expenso.models.Transaction
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -23,4 +25,8 @@ class FireStoreClass {
             }
 
     }
+
+
+
+
 }

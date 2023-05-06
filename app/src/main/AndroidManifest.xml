@@ -15,18 +15,14 @@
         android:theme="@style/Theme.Expenso"
         tools:targetApi="31">
         <activity
+            android:name=".add_reminder"
+            android:exported="false" />
+        <activity
             android:name=".add_profile"
             android:exported="false" />
         <activity
             android:name=".Display_Transactions"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
@@ -47,8 +43,15 @@
         <activity
             android:name=".expensoSplash"
             android:exported="true">
-        </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".chat"
+            android:exported="false" />
     </application>
 
 </manifest>
