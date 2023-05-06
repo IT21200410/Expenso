@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.expenso.data.ApiClient
-import com.example.expenso.model.CompletionRequest
-import com.example.expenso.model.Message
+import com.example.expenso.models.CompletionRequest
+import com.example.expenso.models.Message
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,11 +33,11 @@ class chat_view : ViewModel(){
 
     private fun addResponse(response : String){
         messageList.value?.removeAt(messageList.value?.size?.minus(1) ?: 0)
-        addToChat(response,Message.BOT,getCurrentTimestamp())
+        addToChat(response, Message.BOT,getCurrentTimestamp())
     }
 
     fun callApi(question : String){
-        addToChat("Typing....",Message.BOT,getCurrentTimestamp())
+        addToChat("Typing....", Message.BOT,getCurrentTimestamp())
 
         val completionRequest = CompletionRequest(
             model = "text-davinci-003",

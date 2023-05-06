@@ -2,13 +2,12 @@ package com.example.expenso
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.text.TextUtils.isEmpty
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expenso.databinding.ActivityChatBinding
-import com.example.expenso.model.Message
+import com.example.expenso.models.Message
 import okhttp3.OkHttpClient
 
 class chat : AppCompatActivity() {
