@@ -50,8 +50,8 @@ class AddExpense : BaseActivity() {
                     finish()
                 }
                 R.id.nav_chat -> Toast.makeText(applicationContext, "Clicked Chat", Toast.LENGTH_SHORT).show()
-                R.id.nav_expense ->  {
-                    startActivity(Intent(this, AddExpense::class.java))
+                R.id.nav_transactions ->  {
+                    startActivity(Intent(this, Display_Transactions::class.java))
                     finish()
                 }
 
