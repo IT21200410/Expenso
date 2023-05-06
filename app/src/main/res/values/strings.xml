@@ -46,12 +46,12 @@
     -----------------user profile------------------------
     <string name="yearly_budget">Yearly Budget</string>
     <string name="settings">Settings</string>
-    <string name="darkmode">DarkMode</string>
-    <string name="fingerprint_protection">Fingerprint Lock</string>
+    <string name="language">App Language</string>
+    <string name="currenncy">Currency</string>
     <string name="backup_data">Backup Data</string>
     <string name="share_to_friends">Share to Friends</string>
     <string name="about_us">About Us</string>
-    <string name="rate_us_on_appstore">Rate us On AppStore</string>
+    <string name="expen">Add Expenses</string>
     <string name="Btn_add">Add Profile</string>
 
     --------------dashboard_transaction---------------------

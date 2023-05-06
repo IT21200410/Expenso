@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Expenso"
         tools:targetApi="31">
         <activity
+            android:name=".Setting"
+            android:exported="false" />
+        <activity
             android:name=".add_profile"
             android:exported="false" />
         <activity

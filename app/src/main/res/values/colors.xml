@@ -23,4 +23,8 @@
     <color name="textSecondary">#575A6C</color>
 
 
+    <color name="primary">#1B023B</color>
+    <color name="secondary">#FF03DAC5</color>
+
+
 </resources>
