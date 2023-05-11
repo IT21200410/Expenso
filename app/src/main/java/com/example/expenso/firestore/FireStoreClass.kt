@@ -1,17 +1,85 @@
 package com.example.expenso.firestore
 
-import android.widget.Toast
+import android.app.Activity
+import android.content.ContentValues.TAG
+import android.util.Log
 import com.example.expenso.AddExpense
+import com.example.expenso.EditTransaction
+import com.example.expenso.LoginActivity
+import com.example.expenso.SignUpActivity
+import com.example.expenso.models.User
+import com.example.expenso.utils.Constants
 import com.example.expenso.models.Transaction
+<<<<<<< HEAD
 import com.google.firebase.firestore.FirebaseFirestore
+=======
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.*
+>>>>>>> ca6240658bcf495f61fa4b9035576f443c27e403
 
 class FireStoreClass {
     private val mFireStore = FirebaseFirestore.getInstance()
 
+
+
+    fun registerUser(activity: SignUpActivity,user: User)
+    {
+        mFireStore.collection(Constants.USERS)
+            .document(user.id)
+            .set(user, SetOptions.merge())
+            .addOnSuccessListener {
+               activity.userRegistrationSuccess()
+            }
+            .addOnFailureListener{
+                activity.hideProgressDialog()
+                activity.userRegistrationFail()
+            }
+    }
+
+    fun getCurrentUserID():String {
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        var currentUserID = ""
+        if ( currentUser != null )
+        {
+            currentUserID = currentUser.uid
+        }
+
+        return currentUserID
+    }
+
+    fun getUserDetails(activity: Activity)
+    {
+         mFireStore.collection(Constants.USERS)
+             .document(getCurrentUserID())
+             .get()
+             .addOnSuccessListener { document ->
+                 Log.i(activity.javaClass.simpleName, document.toString())
+
+                 val user = document.toObject(User::class.java)
+
+                 when (activity){
+                     is LoginActivity -> {
+                         activity.userLoggedInSuccess(user!!)
+                     }
+                 }
+
+             }
+             .addOnFailureListener{e ->
+
+             }
+    }
+
+    //Hello
+
     fun addTransaction(activity: AddExpense, transaction: Transaction)
     {
-        val transactionData = mFireStore.collection("userTransactions")
-            .document("1").collection("transactions")
+        val transactionData = mFireStore.collection(Constants.USERTRANSACTIONS)
+            .document(getCurrentUserID()).collection(Constants.TRANSACTIONS)
+
+        val newTransactionRef = transactionData.document().toString()
+        transaction.id = newTransactionRef
 
         transactionData.add(transaction)
             .addOnSuccessListener {
@@ -22,4 +90,30 @@ class FireStoreClass {
             }
 
     }
+
+    fun updateTransaction(activity: EditTransaction, transaction: Transaction)
+    {
+        val transactionRef = mFireStore.collection(Constants.USERTRANSACTIONS)
+            .document(getCurrentUserID()).collection(Constants.TRANSACTIONS)
+
+        transactionRef.whereEqualTo("id", transaction.id)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val documentRef = transactionRef.document(document.id)
+                    documentRef.set(transaction)
+                        .addOnSuccessListener {
+                           activity.updateSuccess()
+                        }
+                        .addOnFailureListener{e ->
+                            activity.updateFail()
+                        }
+
+                }
+            }
+            .addOnFailureListener{e ->
+                Log.w("Fail", "Couldn't edit", e)
+            }
+    }
+
 }

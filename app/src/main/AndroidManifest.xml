@@ -15,15 +15,19 @@
         android:theme="@style/Theme.Expenso"
         tools:targetApi="31">
         <activity
-            android:name=".Setting"
-            android:exported="false"/>
-        <activity
             android:name=".addExpenses"
-            android:exported="false"/>
+            android:exported="false" />
+        <activity
+            android:name=".chat"
+            android:exported="false" />
         <activity
             android:name=".add_profile"
             android:exported="false" />
+        <activity
+            android:name=".Display_Transactions"
+            android:exported="true" >
 
+        </activity>
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
@@ -34,19 +38,6 @@
             android:name=".EditTransaction"
             android:exported="false" />
         <activity
-            android:name=".Display_Transactions"
-            android:exported="false" />
-        <activity
-            android:name=".expensoSplash"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".AddExpense"
             android:exported="false"
             android:theme="@style/Theme.Expenso2" />
@@ -54,6 +45,16 @@
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Expenso2" />
+        <activity
+            android:name=".expensoSplash"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
