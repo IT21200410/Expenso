@@ -12,14 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<<<<<<< HEAD
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerView"
-            android:scrollbars="vertical"
-            android:layout_marginTop="20dp"/>
-=======
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
@@ -30,7 +22,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
->>>>>>> ca6240658bcf495f61fa4b9035576f443c27e403
+
 
 
 
