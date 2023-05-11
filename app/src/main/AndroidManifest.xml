@@ -26,6 +26,7 @@
         <activity
             android:name=".Display_Transactions"
             android:exported="true" >
+
         </activity>
         <activity
             android:name=".SignUpActivity"
@@ -52,6 +53,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

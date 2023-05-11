@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     false
                 }
                 R.id.nav_transactions -> {
-                    startActivity(Intent(this, Display_Transactions::class.java))
+                    startActivity(Intent(this, AddExpense::class.java))
                     finish()
                 }
                 R.id.nav_settings -> {
@@ -58,6 +58,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_reminders -> {
                     startActivity(Intent(this, Display_Transactions::class.java))
+                    finish()
+                }
+                R.id.nav_addexpense -> {
+                    startActivity(Intent(this, AddExpense::class.java))
                     finish()
                 }
 
