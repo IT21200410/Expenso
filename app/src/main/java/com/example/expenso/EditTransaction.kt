@@ -72,10 +72,13 @@ class EditTransaction : BaseActivity() {
         eType.setAdapter(adapter)
 
         submitBtn.setOnClickListener {
-            validateExpenseDetails()
-            val intent = Intent(this, Display_Transactions::class.java)
-            startActivity(intent)
-            finish()
+            if(validateExpenseDetails())
+            {
+                val intent = Intent(this, Display_Transactions::class.java)
+                startActivity(intent)
+                finish()
+            }
+
         }
     }
 

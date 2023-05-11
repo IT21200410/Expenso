@@ -1,5 +1,6 @@
 package com.example.expenso.adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -44,6 +45,11 @@ class TransactionAdapter(private val context: Context, private val transactionLi
             val intent = Intent(context,EditTransaction::class.java)
             intent.putExtra("transaction", transaction)
             context.startActivity(intent)
+
+            if(context is Activity)
+            {
+                context.finish()
+            }
         }
     }
 

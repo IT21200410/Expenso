@@ -10,12 +10,9 @@ import com.example.expenso.SignUpActivity
 import com.example.expenso.models.User
 import com.example.expenso.utils.Constants
 import com.example.expenso.models.Transaction
-<<<<<<< HEAD
-import com.google.firebase.firestore.FirebaseFirestore
-=======
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
->>>>>>> ca6240658bcf495f61fa4b9035576f443c27e403
+import kotlinx.coroutines.tasks.await
 
 class FireStoreClass {
     private val mFireStore = FirebaseFirestore.getInstance()
