@@ -15,18 +15,24 @@
         android:theme="@style/Theme.Expenso"
         tools:targetApi="31">
         <activity
+            android:name=".Setting"
+            android:exported="true"
+            android:theme="@style/Theme.Expenso2"/>
+        <activity
             android:name=".addExpenses"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.Expenso2"/>
         <activity
             android:name=".chat"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.Expenso2" />
         <activity
             android:name=".add_profile"
             android:exported="false" />
         <activity
             android:name=".Display_Transactions"
-            android:exported="true" >
-
+            android:exported="true"
+            android:theme="@style/Theme.Expenso2">
         </activity>
         <activity
             android:name=".SignUpActivity"

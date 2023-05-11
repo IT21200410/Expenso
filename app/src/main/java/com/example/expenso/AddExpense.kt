@@ -94,6 +94,8 @@ class AddExpense : BaseActivity() {
 
         submitBtn.setOnClickListener {
             validateExpenseDetails()
+            startActivity(Intent(this@AddExpense, Display_Transactions::class.java))
+            finish()
         }
 
 
