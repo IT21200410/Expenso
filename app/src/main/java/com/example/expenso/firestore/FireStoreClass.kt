@@ -4,7 +4,6 @@ import android.widget.Toast
 import com.example.expenso.AddExpense
 import com.example.expenso.models.Transaction
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 
 class FireStoreClass {
     private val mFireStore = FirebaseFirestore.getInstance()

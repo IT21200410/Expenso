@@ -47,7 +47,8 @@
                 android:paddingStart="30dp"
                 android:layout_gravity="center"
                 android:background="@drawable/round_back_secondary_100"
-                android:text="Edit Profile"
+                android:text="Add Profile"
+                android:id="@+id/addprof"
                 android:textAllCaps="false"
                 android:textColor="@color/primary"
                 android:paddingEnd="30dp"/>
