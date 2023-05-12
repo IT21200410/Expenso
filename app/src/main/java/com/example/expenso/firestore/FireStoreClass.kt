@@ -128,17 +128,17 @@ class FireStoreClass {
 
     }
 
-    fun updateTransaction(activity: EditTransaction, transaction: Transaction)
+    fun updateExpensesType(activity: addExpenses, expenses: ExpensesType)
     {
-        val transactionRef = mFireStore.collection(Constants.USERTRANSACTIONS)
-            .document(getCurrentUserID()).collection(Constants.TRANSACTIONS)
+        val expensesRef = mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(getCurrentUserID()).collection(Constants.EXPENSESL)
 
-        transactionRef.whereEqualTo("id", transaction.id)
+        expensesRef.whereEqualTo("id", expenses.id)
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents){
-                    val documentRef = transactionRef.document(document.id)
-                    documentRef.set(transaction)
+                    val documentRef = expensesRef.document(document.id)
+                    documentRef.set(expenses)
                         .addOnSuccessListener {
                             activity.updateSuccess()
                         }
@@ -163,6 +163,30 @@ class FireStoreClass {
             .addOnSuccessListener { documents ->
                 for(document in documents){
                     val documentRef = transactionRef.document(document.id).delete()
+                        .addOnSuccessListener {
+                            activity.updateSuccess()
+                        }
+                        .addOnFailureListener{e ->
+                            activity.updateFail()
+                        }
+
+                }
+            }
+            .addOnFailureListener{e ->
+                Log.w("Fail", "Couldn't edit", e)
+            }
+    }
+
+    fun deleteExpensesType(activity: addExpenses, expenses: ExpensesType)
+    {
+        val expensesRef = mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(getCurrentUserID()).collection(Constants.EXPENSESL)
+
+        expensesRef.whereEqualTo("id", expenses.id)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val documentRef = expensesRef.document(document.id).delete()
                         .addOnSuccessListener {
                             activity.updateSuccess()
                         }

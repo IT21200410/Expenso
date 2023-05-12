@@ -1,6 +1,7 @@
 package com.example.expenso
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
@@ -25,6 +26,7 @@ import com.example.expenso.models.Transaction
 import com.example.expenso.utils.Constants
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.toObject
 
 class addExpenses :BaseActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -120,7 +122,7 @@ class addExpenses :BaseActivity() {
 
                 )
 
-           // FireStoreClass().addExpensesType(this@addExpenses, expensesType)
+            FireStoreClass().addExpensesType(this@addExpenses, expensesType)
 
 
         }
@@ -153,7 +155,7 @@ class addExpenses :BaseActivity() {
 
                 )
 
-            // FireStoreClass().updateExpensesType(this@addExpenses, expensesType)
+             FireStoreClass().updateExpensesType(this@addExpenses, expensesType)
 
 
         }
@@ -169,26 +171,33 @@ class addExpenses :BaseActivity() {
     private fun EventChangeListener() {
 
         mFireStore.collection(Constants.EXPENSESTYPE)
-    .document(FireStoreClass().getCurrentUserID()).collection(Constants.EXPENSESL)
-    .addSnapshotListener(object: EventListener<QuerySnapshot>{
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-        if (error != null) {
-            Log.e("Firestore error", error.message.toString())
-            return
-        }
+            .document(FireStoreClass().getCurrentUserID())
+            .collection(Constants.EXPENSESL)
+            .addSnapshotListener(object: EventListener<QuerySnapshot>{
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
 
-        for (mFireStore: DocumentChange in value?.documentChanges!!) {
-            if (mFireStore.type == DocumentChange.Type.ADDED) {
-                expensesList.add(mFireStore.document.toObject(ExpensesType::class.java))
-            }
+                    if (error != null)
+                    {
+                        Log.e(TAG,"onEvent", error)
+                        return
+                    }
+                    if ( value != null && !value.isEmpty)
+                    {
+                        expensesList.clear()
+                        for(document in value.documents) {
+                            val data = document.toObject<ExpensesType>()
+                            expensesList.add(data!!)
+                        }
 
-        }
-        expensesAdapter.notifyDataSetChanged()
+                        expensesAdapter.notifyDataSetChanged()
+                    }
+                    else
+                    {
+                        Log.e(TAG, "onEvent: query snapshot was null")
+                    }
+                }
 
-    }
-
-    })
+            })
 
     }
 
@@ -222,6 +231,9 @@ class addExpenses :BaseActivity() {
 
     fun updateFail() {
         Toast.makeText(this, "Couldn't edit expenses Type", Toast.LENGTH_SHORT).show()
+    }
+    fun deleteExpenseType(deleteType:ExpensesType){
+        FireStoreClass().deleteExpensesType(this,deleteType)
     }
 
 }

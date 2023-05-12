@@ -82,6 +82,7 @@
     <string name="about_us">About Us</string>
     <string name="expen">Add Expenses</string>
     <string name="Btn_add">Add Profile</string>
+    <string name="Btn_updateprofile">Update Profile</string>
 
     --------------dashboard_transaction---------------------
     <string name="all">All</string>
@@ -120,7 +121,7 @@
     <string name="transactions">Transactions</string>
     <string name="reminders">Reminders</string>
     <string name="edit_transaction">EDIT TRANSACTION</string>
------------------about us---------------------------
+    -----------------about us---------------------------
     <string name="about">
         *EXPENSO is a  expense tracker that’s great for home budget planning.
         *This personal finance manager is a virtual update on your grandma’s envelope system--a proactive budget planner that helps you stay on top of your bills and finances.

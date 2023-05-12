@@ -12,6 +12,7 @@ import com.google.android.material.navigation.NavigationView
 
 class Setting : AppCompatActivity() {
     private lateinit var btnExpense: Button
+    private lateinit var btnAboutus:Button
     private lateinit var toggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +20,7 @@ class Setting : AppCompatActivity() {
 
         btnExpense = findViewById(R.id.btnexpen)
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_background))
+        btnAboutus = findViewById(R.id.aboutus)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
@@ -57,6 +59,9 @@ class Setting : AppCompatActivity() {
 
         btnExpense.setOnClickListener{
             startActivity(Intent(this, addExpenses::class.java))
+        }
+        btnAboutus.setOnClickListener{
+            startActivity(Intent(this, About_us::class.java))
         }
 
     }

@@ -52,19 +52,12 @@ class ExpensesAdapter(private val context: Context, private val expensesList:Arr
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.cbTodo.text = expensesList[position].expensesName
-        holder.ivDelete.setOnClickListener(){
+        holder.ivDelete.setOnClickListener{
 
             if(holder.cbTodo.isChecked){
-//                val repository = ExpensesRepository(TodoDatabase.getInstance(context))
-//
-//                CoroutineScope(Dispatchers.IO ).launch {
-//                    repository.delete(expensesList[position])
-//                    //
-//                withContext(Dispatchers.Main){
-//                    var data = repository.getAllTodos()
-//                    setData(data,context)
-             //   }
-               // }
+            if (context is addExpenses){
+                context.deleteExpenseType(expensesList[position])
+            }
             }
         else
             {
