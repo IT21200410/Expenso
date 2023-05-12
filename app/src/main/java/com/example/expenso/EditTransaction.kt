@@ -80,6 +80,8 @@ class EditTransaction : BaseActivity() {
             }
 
         }
+
+
     }
 
     private fun updateLabel(myCalendar:Calendar)

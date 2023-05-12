@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -158,5 +159,9 @@ class AddExpense : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+//    private fun onRadioButtonClicked(view: View)
+//    {
+//        var isSelected =
+//    }
 
 }

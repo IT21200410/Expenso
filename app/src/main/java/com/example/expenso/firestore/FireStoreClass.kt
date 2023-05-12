@@ -100,6 +100,7 @@ class FireStoreClass {
                     documentRef.set(transaction)
                         .addOnSuccessListener {
                            activity.updateSuccess()
+
                         }
                         .addOnFailureListener{e ->
                             activity.updateFail()
