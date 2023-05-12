@@ -5,7 +5,6 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.expenso.*
 import com.example.expenso.models.ExpensesType
-import com.example.expenso.*
 import com.example.expenso.models.User
 import com.example.expenso.utils.Constants
 import com.example.expenso.models.Transaction
@@ -100,6 +99,48 @@ class FireStoreClass {
                     documentRef.set(transaction)
                         .addOnSuccessListener {
                            activity.updateSuccess()
+                        }
+                        .addOnFailureListener{e ->
+                            activity.updateFail()
+                        }
+
+                }
+            }
+            .addOnFailureListener{e ->
+                Log.w("Fail", "Couldn't edit", e)
+            }
+    }
+    fun addExpensesType(activity: addExpenses, expense: ExpensesType)
+    {
+        val expensesData = mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(getCurrentUserID()).collection(Constants.EXPENSESL)
+
+        val newExpensesRef = expensesData.document().toString()
+        expense.id = newExpensesRef
+
+        expensesData.add(expense)
+            .addOnSuccessListener {
+                activity.expensesSuccess()
+            }
+            .addOnFailureListener{
+                activity.expensesFail()
+            }
+
+    }
+
+    fun updateTransaction(activity: EditTransaction, transaction: Transaction)
+    {
+        val transactionRef = mFireStore.collection(Constants.USERTRANSACTIONS)
+            .document(getCurrentUserID()).collection(Constants.TRANSACTIONS)
+
+        transactionRef.whereEqualTo("id", transaction.id)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val documentRef = transactionRef.document(document.id)
+                    documentRef.set(transaction)
+                        .addOnSuccessListener {
+                            activity.updateSuccess()
                         }
                         .addOnFailureListener{e ->
                             activity.updateFail()
