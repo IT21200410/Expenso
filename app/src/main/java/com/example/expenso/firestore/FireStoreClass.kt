@@ -6,6 +6,8 @@ import com.example.expenso.AddExpense
 import com.example.expenso.LoginActivity
 import com.example.expenso.SignUpActivity
 import com.example.expenso.adapters.TransactionAdapter
+import com.example.expenso.add_reminder
+import com.example.expenso.models.Reminder
 import com.example.expenso.models.Transaction
 import com.example.expenso.models.User
 import com.example.expenso.utils.Constants
@@ -77,6 +79,21 @@ class FireStoreClass {
             }
             .addOnFailureListener{
                 activity.transactionFail()
+            }
+
+    }
+
+    fun addReminder(activity: add_reminder, reminder: Reminder)
+    {
+        val reminderData = mFireStore.collection(Constants.USERREMINDERS)
+            .document(getCurrentUserID()).collection(Constants.REMINDER)
+
+        reminderData.add(reminder)
+            .addOnSuccessListener {
+                activity.reminderAddSuccess()
+            }
+            .addOnFailureListener{
+                activity.reminderAddFail()
             }
 
     }

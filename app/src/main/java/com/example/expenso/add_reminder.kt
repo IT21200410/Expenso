@@ -4,21 +4,22 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
-import android.widget.DatePicker
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import com.example.expenso.firestore.FireStoreClass
+import com.example.expenso.models.Reminder
 import java.text.SimpleDateFormat
 import java.util.*
 
-class add_reminder : AppCompatActivity() {
+class add_reminder : BaseActivity() {
 
     private lateinit var addReminderBtn : Button
     private lateinit var labelInput :EditText
     private lateinit var dateInput : EditText
     private lateinit var amountInput : EditText
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_reminder)
@@ -47,24 +48,47 @@ class add_reminder : AppCompatActivity() {
         }
 
         addReminderBtn.setOnClickListener(){
-            val label:String  = labelInput.toString()
-            val amount  = amountInput.toString().toDouble()
+            validateReminderDetails()
+        }
+    }
 
-            if(label.isEmpty()){
-                Toast.makeText(applicationContext, "Enter a valid type", Toast.LENGTH_SHORT).show()
+    private fun validateReminderDetails():Boolean {
+        return when {
+            TextUtils.isEmpty(dateInput.text.toString().trim { it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_date), true)
+                false
+
             }
-            if(amount == null)
-                Toast.makeText(applicationContext, "Enter a valid amount", Toast.LENGTH_SHORT).show()
+            TextUtils.isEmpty(labelInput.text.toString().trim { it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_type), true)
+                false
+            }
+            TextUtils.isEmpty(amountInput.text.toString().trim { it <= ' '}) -> {
+                showErrorSnackBar(resources.getString(R.string.err_amount), true)
+                false
+            }
+            else -> {
+
+                val reminder = Reminder(
+                    dateInput.text.toString().trim { it <= ' ' },
+                    labelInput.text.toString().trim { it <= ' ' },
+                    amountInput.text.toString().trim { it <= ' ' }.toDouble(),
+
+                )
+
+                FireStoreClass().addReminder(this@add_reminder, reminder)
+                true
+            }
 
         }
     }
 
     fun reminderAddSuccess(){
-        Toast.makeText(this, "Transaction added", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Reminder added", Toast.LENGTH_SHORT).show()
     }
 
     fun reminderAddFail(){
-        Toast.makeText(this, "Transaction was not added", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Reminder was not added", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateLabel(myCalendar:Calendar)
