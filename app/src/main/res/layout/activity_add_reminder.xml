@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
-                android:hint="@string/label"
+                android:hint="@string/title"
                 app:errorEnabled="true"
                 >
 

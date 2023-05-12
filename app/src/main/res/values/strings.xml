@@ -120,6 +120,7 @@
     <string name="transactions">Transactions</string>
     <string name="reminders">Reminders</string>
     <string name="edit_transaction">EDIT TRANSACTION</string>
+    <string name="add_reminder">Add Reminder</string>
 
 
 </resources>
