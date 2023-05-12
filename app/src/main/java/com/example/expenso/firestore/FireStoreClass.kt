@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.expenso.*
 import com.example.expenso.models.ExpensesType
+import com.example.expenso.*
 import com.example.expenso.models.User
 import com.example.expenso.utils.Constants
 import com.example.expenso.models.Transaction
@@ -99,6 +100,7 @@ class FireStoreClass {
                     documentRef.set(transaction)
                         .addOnSuccessListener {
                            activity.updateSuccess()
+
                         }
                         .addOnFailureListener{e ->
                             activity.updateFail()
@@ -164,10 +166,10 @@ class FireStoreClass {
                 for(document in documents){
                     val documentRef = transactionRef.document(document.id).delete()
                         .addOnSuccessListener {
-                            activity.updateSuccess()
+                            activity.DeleteSuccess()
                         }
                         .addOnFailureListener{e ->
-                            activity.updateFail()
+                            activity.DeleteFail()
                         }
 
                 }
@@ -200,5 +202,43 @@ class FireStoreClass {
                 Log.w("Fail", "Couldn't edit", e)
             }
     }
+
+    fun getDashboardStatistics(activity: MainActivity)
+    {
+        var totalExpense = 0.0
+        var totalIncome = 0.0
+        var totalBalance = 0.0
+        var amount = 0.0
+
+        mFireStore.collection(Constants.USERTRANSACTIONS)
+            .document(getCurrentUserID()).collection(Constants.TRANSACTIONS)
+            .get()
+            .addOnSuccessListener { documents ->
+
+                for(document in documents){
+
+                    amount = document.getDouble("amount")!!
+
+                    if ( document.getString("transactionType") == "Income")
+                    {
+                        totalIncome += amount
+                    }
+                    else
+                    {
+                        totalExpense += amount
+                    }
+
+                }
+
+                totalBalance = totalIncome - totalExpense
+                activity.updateDashboard(totalIncome, totalExpense, totalBalance)
+
+            }
+            .addOnFailureListener{e ->
+
+            }
+    }
+
+
 
 }

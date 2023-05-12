@@ -10,11 +10,13 @@ import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.expenso.firestore.FireStoreClass
 import com.google.android.material.navigation.NavigationView
 //import okhttp3.*
 //import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -25,8 +27,13 @@ import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
-//    var client = OkHttpClient()
+
     private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var tvBalance: TextView
+    private lateinit var tvIncome: TextView
+    private lateinit var tvExpense: TextView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,6 +42,10 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout:DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
+        tvBalance = findViewById(R.id.tvBalance)
+        tvIncome = findViewById(R.id.tvIncome)
+        tvExpense = findViewById(R.id.tvExpense)
+
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -67,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
+        FireStoreClass().getDashboardStatistics(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -77,6 +88,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun updateDashboard(tIncome:Double,tExpense:Double, tBalance:Double)
+    {
+        tvBalance.text = tBalance.toString()
+        tvIncome.text = tIncome.toString()
+        tvExpense.text = tExpense.toString()
     }
 
 

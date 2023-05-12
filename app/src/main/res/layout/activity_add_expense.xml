@@ -15,39 +15,41 @@
 
     <RadioGroup
         android:id="@+id/rd"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/ly"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <RadioButton
             android:layout_width="0dp"
+            android:id="@+id/rbLeft"
             android:layout_height = "50dp"
             android:textColor="@color/white"
-            android:text="INCOME"
+            android:text="EXPENSE"
             android:gravity="center"
             android:checked = "true"
             android:button="@android:color/transparent"
             android:layout_weight="1"
-            android:background="@drawable/radio_button_left_selector"/>
+            android:background="@drawable/radio_button_left_selector"
+            android:layout_marginStart="10dp"
+            />
 
         <RadioButton
             android:layout_width="0dp"
+            android:id="@+id/rbRight"
             android:layout_height = "50dp"
             android:textColor="@color/chat_gradient_start"
-            android:text="EXPENSE"
+            android:text="INCOME"
+            android:checked="false"
             android:gravity="center"
             android:button="@android:color/transparent"
-            android:layout_weight="1"/>
-
-
-
-
-
-
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_right_selector"
+            android:layout_marginEnd="10dp" />
     </RadioGroup>
     
     <LinearLayout

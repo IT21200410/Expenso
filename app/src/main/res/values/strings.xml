@@ -128,5 +128,9 @@
         *Built for easy, real-time tracking. And, sync across Android and the web to share your budget with your budgeting partners.
         *Keep everyone on the same page with household finances!</string>
     <string name="add_reminder">Add Reminder</string>
+    <string name="Balance">Balance</string>
+    <string name="value">$100000</string>
+    <string name="Total_income">Total Income</string>
+    <string name="Total_expense">Total expense</string>
 
 </resources>
