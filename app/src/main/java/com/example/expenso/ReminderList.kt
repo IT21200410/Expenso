@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expenso.adapters.ReminderAdapter
@@ -49,32 +50,53 @@ class ReminderList : AppCompatActivity() {
     {
 
         val fireStore = FirebaseFirestore.getInstance()
+//
+//        fireStore.collection(Constants.USERREMINDERS)
+//            .document(FireStoreClass().getCurrentUserID()).collection(Constants.REMINDER)
+//            .addSnapshotListener(object: EventListener<QuerySnapshot> {
+//                @SuppressLint("NotifyDataSetChanged")
+//                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+//                    if (error != null)
+//                    {
+//                        Log.e("Firestore error", error.message.toString())
+//                        return
+//                    }
+//
+//                    for( fireStore: DocumentChange in value?.documentChanges!!)
+//                    {
+//                        if(fireStore.type == DocumentChange.Type.ADDED)
+//                        {
+//                            reminderList.add(fireStore.document.toObject(Reminder::class.java))
+//                            Log.v("list : ",reminderList[0].date)
+//
+//                        }
+//                    }
+//                    reminderAdapter.notifyDataSetChanged()
+//
+//                }
+//
+//            })
 
         fireStore.collection(Constants.USERREMINDERS)
             .document(FireStoreClass().getCurrentUserID()).collection(Constants.REMINDER)
-            .addSnapshotListener(object: EventListener<QuerySnapshot> {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                    if (error != null)
-                    {
-                        Log.e("Firestore error", error.message.toString())
-                        return
+            .get()
+            .addOnSuccessListener {
+                if( !it.isEmpty)
+                {
+                    for(data in it.documents){
+                        val reminder:Reminder? = data.toObject<Reminder>(Reminder::class.java)
+                        reminderList.add(reminder!!)
                     }
-
-                    for( fireStore: DocumentChange in value?.documentChanges!!)
-                    {
-                        if(fireStore.type == DocumentChange.Type.ADDED)
-                        {
-                            reminderList.add(fireStore.document.toObject(Reminder::class.java))
-                            Log.v("list : ",reminderList[0].date)
-
-                        }
-                    }
-                    reminderAdapter.notifyDataSetChanged()
-
+                    recyclerView.adapter = ReminderAdapter(this, reminderList)
                 }
+            }
+            .addOnFailureListener{
+                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+            }
 
-            })
 
     }
-}
+
+
+
+    }

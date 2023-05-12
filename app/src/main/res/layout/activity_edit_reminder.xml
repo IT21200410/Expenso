@@ -103,7 +103,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/button_style"
-                android:text="@string/add_reminder"
+                android:text="@string/edit_reminder"
                 android:textColor="@color/white"/>
 
         </LinearLayout>

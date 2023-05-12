@@ -2,6 +2,7 @@ package com.example.expenso
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -70,8 +71,10 @@ class add_reminder : BaseActivity() {
             else -> {
 
                 val reminder = Reminder(
-                    dateInput.text.toString().trim { it <= ' ' },
+                    "",
+
                     labelInput.text.toString().trim { it <= ' ' },
+                    dateInput.text.toString().trim { it <= ' ' },
                     amountInput.text.toString().trim { it <= ' ' }.toDouble(),
 
                 )
@@ -85,6 +88,7 @@ class add_reminder : BaseActivity() {
 
     fun reminderAddSuccess(){
         Toast.makeText(this, "Reminder added", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, ReminderList::class.java))
     }
 
     fun reminderAddFail(){

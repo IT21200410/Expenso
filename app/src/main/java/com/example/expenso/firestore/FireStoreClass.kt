@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.expenso.*
+import com.example.expenso.databinding.ActivityAddReminderBinding
+import com.example.expenso.models.Reminder
 import com.example.expenso.models.User
 import com.example.expenso.utils.Constants
 import com.example.expenso.models.Transaction
@@ -120,6 +122,49 @@ class FireStoreClass {
             .addOnSuccessListener { documents ->
                 for(document in documents){
                     val documentRef = transactionRef.document(document.id).delete()
+                        .addOnSuccessListener {
+                            activity.updateSuccess()
+                        }
+                        .addOnFailureListener{e ->
+                            activity.updateFail()
+                        }
+
+                }
+            }
+            .addOnFailureListener{e ->
+                Log.w("Fail", "Couldn't edit", e)
+            }
+    }
+
+    fun addReminder(activity: add_reminder, reminder: Reminder )
+    {
+        val reminderData = mFireStore.collection(Constants.USERREMINDERS)
+            .document(getCurrentUserID()).collection(Constants.REMINDER)
+
+        val newTransactionRef = reminderData.document().toString()
+        reminder.id = newTransactionRef
+
+        reminderData.add(reminder)
+            .addOnSuccessListener {
+                activity.reminderAddSuccess()
+            }
+            .addOnFailureListener{
+                activity.reminderAddFail()
+            }
+
+    }
+
+    fun updateReminder(activity: EditReminder, reminder: Reminder)
+    {
+        val reminderObj = mFireStore.collection(Constants.USERREMINDERS)
+            .document(getCurrentUserID()).collection(Constants.REMINDER)
+
+        reminderObj.whereEqualTo("id", reminder.id)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val documentRef = reminderObj.document(document.id)
+                    documentRef.set(reminder)
                         .addOnSuccessListener {
                             activity.updateSuccess()
                         }

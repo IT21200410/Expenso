@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, chat::class.java))
                 }
                 R.id.nav_reminders -> {
-                    startActivity(Intent(this, Reminders::class.java))
+                    startActivity(Intent(this, ReminderList::class.java))
                     finish()
                 }
 

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expenso.EditReminder
+import com.example.expenso.EditTransaction
 import com.example.expenso.R
 import com.example.expenso.models.Reminder
 
@@ -41,8 +42,8 @@ class ReminderAdapter(private val context: Context, private val reminderList:Arr
         holder.tv3.text = reminder.date
 
         holder.card.setOnClickListener {
-            val intent = Intent(context,EditReminder::class.java)
-//            intent.putExtra("reminder", reminder)
+            val intent = Intent(context, EditReminder::class.java)
+            intent.putExtra("reminder", reminder)
             context.startActivity(intent)
         }
     }
