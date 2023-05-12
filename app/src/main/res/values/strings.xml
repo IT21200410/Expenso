@@ -30,7 +30,7 @@
     <string name="err_msg_enter_confirm_password">Please enter confirm password.</string>
     <string name="err_msg_password_and_confirm_password_mismatch">Password and confirm password does not match.</string>
 
-    <string name = "please_wait" >Please Wait ...</string>
+    <string name="please_wait">Please Wait ...</string>
 
     ----------------Add Transaction----------------
     <string name="new_transaction">New Transaction</string>
@@ -120,6 +120,11 @@
     <string name="transactions">Transactions</string>
     <string name="reminders">Reminders</string>
     <string name="edit_transaction">EDIT TRANSACTION</string>
-
+-----------------about us---------------------------
+    <string name="about">
+        *EXPENSO is a  expense tracker that’s great for home budget planning.
+        *This personal finance manager is a virtual update on your grandma’s envelope system--a proactive budget planner that helps you stay on top of your bills and finances.
+        *Built for easy, real-time tracking. And, sync across Android and the web to share your budget with your budgeting partners.
+        *Keep everyone on the same page with household finances!</string>
 
 </resources>

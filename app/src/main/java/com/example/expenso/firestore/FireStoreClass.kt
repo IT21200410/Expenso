@@ -3,10 +3,8 @@ package com.example.expenso.firestore
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.expenso.AddExpense
-import com.example.expenso.EditTransaction
-import com.example.expenso.LoginActivity
-import com.example.expenso.SignUpActivity
+import com.example.expenso.*
+import com.example.expenso.models.ExpensesType
 import com.example.expenso.models.User
 import com.example.expenso.utils.Constants
 import com.example.expenso.models.Transaction
@@ -101,6 +99,48 @@ class FireStoreClass {
                     documentRef.set(transaction)
                         .addOnSuccessListener {
                            activity.updateSuccess()
+                        }
+                        .addOnFailureListener{e ->
+                            activity.updateFail()
+                        }
+
+                }
+            }
+            .addOnFailureListener{e ->
+                Log.w("Fail", "Couldn't edit", e)
+            }
+    }
+    fun addExpensesType(activity: addExpenses, expenses: ExpensesType)
+    {
+        val expensesData = mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(getCurrentUserID()).collection(Constants.EXPENSESL)
+
+        val newExpensesRef = expensesData.document().toString()
+        expenses.id = newExpensesRef
+
+        expensesData.add(expenses)
+            .addOnSuccessListener {
+                activity.expensesSuccess()
+            }
+            .addOnFailureListener{
+                activity.expensesFail()
+            }
+
+    }
+
+    fun updateExpensesType(activity: addExpenses, expenses: ExpensesType)
+    {
+        val expensesRef = mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(getCurrentUserID()).collection(Constants.EXPENSESL)
+
+        expensesRef.whereEqualTo("id", expenses.id)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val documentRef = expensesRef.document(document.id)
+                    documentRef.set(expenses)
+                        .addOnSuccessListener {
+                            activity.updateSuccess()
                         }
                         .addOnFailureListener{e ->
                             activity.updateFail()
