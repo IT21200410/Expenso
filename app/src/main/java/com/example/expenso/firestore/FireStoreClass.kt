@@ -6,6 +6,8 @@ import android.util.Log
 import com.example.expenso.*
 import com.example.expenso.databinding.ActivityAddReminderBinding
 import com.example.expenso.models.Reminder
+import com.example.expenso.models.ExpensesType
+import com.example.expenso.*
 import com.example.expenso.models.User
 import com.example.expenso.utils.Constants
 import com.example.expenso.models.Transaction

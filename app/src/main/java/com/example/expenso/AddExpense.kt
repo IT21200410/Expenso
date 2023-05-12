@@ -112,6 +112,7 @@ class AddExpense : BaseActivity() {
         Toast.makeText(this, "Transaction added", Toast.LENGTH_SHORT).show()
     }
 
+
     fun transactionFail(){
         Toast.makeText(this, "Transaction was not added", Toast.LENGTH_SHORT).show()
     }

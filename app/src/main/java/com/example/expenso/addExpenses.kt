@@ -1,40 +1,59 @@
 package com.example.expenso
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.text.InputType
+import android.text.TextUtils
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.expenso.database.TodoDatabase
-import com.example.expenso.database.entities.Todo
-import com.example.expenso.database.repositories.ExpensesRepository
 import com.example.expenso.adapters.ExpensesAdapter
+import com.example.expenso.firestore.FireStoreClass
+import com.example.expenso.models.ExpensesType
+import com.example.expenso.models.Transaction
+import com.example.expenso.utils.Constants
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.google.firebase.firestore.*
 
-class addExpenses : AppCompatActivity() {
+class addExpenses :BaseActivity() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var expensesList: ArrayList<ExpensesType>
+    private lateinit var expensesAdapter: ExpensesAdapter
     private lateinit var toggle: ActionBarDrawerToggle
+    private val mFireStore = FirebaseFirestore.getInstance()
+
+//    //update
+
+    private lateinit var id: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_expenses)
 
-        val recyclerView: RecyclerView = findViewById(R.id.To_do_list)
-        val adapter = ExpensesAdapter()
-        val repository = ExpensesRepository(TodoDatabase.getInstance(this))
+        recyclerView = findViewById(R.id.Recycleviewlist)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = GridLayoutManager(this, 1)
+
+        //update
+
+
+
+
+        //background
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_background))
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
-        val navView : NavigationView = findViewById(R.id.nav_view)
+        val navView: NavigationView = findViewById(R.id.nav_view)
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -42,7 +61,7 @@ class addExpenses : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         navView.setNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.nav_dashboard -> {
                     false
                 }
@@ -67,26 +86,22 @@ class addExpenses : AppCompatActivity() {
             true
         }
 
-        CoroutineScope(Dispatchers.IO).launch {
-
-            val data = repository.getAllTodos()
-            adapter.setData(data,this@addExpenses)
-        }
+        expensesList = ArrayList()
+        expensesAdapter = ExpensesAdapter(this, expensesList)
+        recyclerView.adapter = expensesAdapter
 
 
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager= LinearLayoutManager(this)
+        val addbtn = findViewById<Button>(R.id.Btn_addItem)
+        addbtn.setOnClickListener({
 
-        val btnAddTodo = findViewById<Button>(R.id.Btn_addItem)
-        btnAddTodo.setOnClickListener({
-
-            displayDialog(repository,adapter)
+            displayDialog(expensesAdapter)
 
         })
-
+        EventChangeListener()
     }
 
-    fun displayDialog(repository: ExpensesRepository, adapter: ExpensesAdapter){
+
+    fun displayDialog(adapter: ExpensesAdapter) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Enter New Expenses")
         builder.setMessage("Enter the Expenses")
@@ -95,26 +110,22 @@ class addExpenses : AppCompatActivity() {
         input.inputType = InputType.TYPE_CLASS_TEXT
         builder.setView(input)
 
-        builder.setPositiveButton("OK"){
-                dialog,which->
+        builder.setPositiveButton("OK") { dialog, which ->
 
             val item = input.text.toString()
 
-            CoroutineScope(Dispatchers.IO).launch {
-                repository.insert(Todo(item))
+            val expensesType = ExpensesType(
+                "",
+                item.trim { it <= ' ' },
 
+                )
 
-                val data = repository.getAllTodos()
-                runOnUiThread{
-                    adapter.setData(data,this@addExpenses)
-                }
+           // FireStoreClass().addExpensesType(this@addExpenses, expensesType)
 
-            }
 
         }
 
-        builder.setNegativeButton("Cancel"){
-                dialog,which ->
+        builder.setNegativeButton("Cancel") { dialog, which ->
             dialog.cancel()
         }
 
@@ -122,14 +133,96 @@ class addExpenses : AppCompatActivity() {
         alertDialog.show()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item))
-        {
+    fun updateDialog(updateType: ExpensesType){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Update Expense Type")
+
+
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        input.setText(updateType.expensesName)
+        builder.setView(input)
+
+        builder.setPositiveButton("OK") { dialog, which ->
+
+            val item = input.text.toString()
+
+            val expensesType = ExpensesType(
+                updateType.id,
+                item.trim { it <= ' ' },
+
+                )
+
+            // FireStoreClass().updateExpensesType(this@addExpenses, expensesType)
+
+
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            dialog.cancel()
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun EventChangeListener() {
+
+        mFireStore.collection(Constants.EXPENSESTYPE)
+    .document(FireStoreClass().getCurrentUserID()).collection(Constants.EXPENSESL)
+    .addSnapshotListener(object: EventListener<QuerySnapshot>{
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+        if (error != null) {
+            Log.e("Firestore error", error.message.toString())
+            return
+        }
+
+        for (mFireStore: DocumentChange in value?.documentChanges!!) {
+            if (mFireStore.type == DocumentChange.Type.ADDED) {
+                expensesList.add(mFireStore.document.toObject(ExpensesType::class.java))
+            }
+
+        }
+        expensesAdapter.notifyDataSetChanged()
+
+    }
+
+    })
+
+    }
+
+
+
+
+
+
+    fun expensesSuccess() {
+        Toast.makeText(this, "Expense Type added", Toast.LENGTH_SHORT).show()
+    }
+
+
+    fun expensesFail() {
+        Toast.makeText(this, "Expense Type was not added", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem)
+            : Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
             return true
         }
 
         return super.onOptionsItemSelected(item)
     }
+//update
 
-
+    fun updateSuccess() {
+        Toast.makeText(this, "Expenses Type edited", Toast.LENGTH_SHORT).show()
     }
+
+    fun updateFail() {
+        Toast.makeText(this, "Couldn't edit expenses Type", Toast.LENGTH_SHORT).show()
+    }
+
+}
+

@@ -9,29 +9,33 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expenso.R
+import com.example.expenso.addExpenses
 import com.example.expenso.database.TodoDatabase
 import com.example.expenso.database.entities.Todo
 import com.example.expenso.database.repositories.ExpensesRepository
+import com.example.expenso.models.ExpensesType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ExpensesAdapter: RecyclerView.Adapter<ExpensesAdapter.VH>() {
+class ExpensesAdapter(private val context: Context, private val expensesList:ArrayList<ExpensesType>):RecyclerView.Adapter<ExpensesAdapter.VH>()
+{
 
 
-    lateinit var data:List<Todo>
-    lateinit var context: Context
+
 
 
     class VH(view: View):RecyclerView.ViewHolder(view)
     {
         val cbTodo:CheckBox
         val ivDelete:ImageView
+        val ivEdit:ImageView
 
         init {
             cbTodo = view.findViewById(R.id.checkBox)
             ivDelete = view.findViewById(R.id.imageButton)
+            ivEdit = view.findViewById(R.id.imageBu)
         }
 
 
@@ -43,39 +47,46 @@ class ExpensesAdapter: RecyclerView.Adapter<ExpensesAdapter.VH>() {
     }
 
     override fun getItemCount(): Int {
-        return data.size;
+        return expensesList.size;
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.cbTodo.text = data[position].item
+        holder.cbTodo.text = expensesList[position].expensesName
         holder.ivDelete.setOnClickListener(){
 
             if(holder.cbTodo.isChecked){
-                val repository = ExpensesRepository(TodoDatabase.getInstance(context))
-
-                CoroutineScope(Dispatchers.IO ).launch {
-                    repository.delete(data[position])
-                    //
-                withContext(Dispatchers.Main){
-                    var data = repository.getAllTodos()
-                    setData(data,context)
-                }
-                }
-            }else{
+//                val repository = ExpensesRepository(TodoDatabase.getInstance(context))
+//
+//                CoroutineScope(Dispatchers.IO ).launch {
+//                    repository.delete(expensesList[position])
+//                    //
+//                withContext(Dispatchers.Main){
+//                    var data = repository.getAllTodos()
+//                    setData(data,context)
+             //   }
+               // }
+            }
+        else
+            {
                 Toast.makeText(context,"Cannot delete unchecked todo item", Toast.LENGTH_LONG ).show()
+            }
+            holder.ivEdit.setOnClickListener{
+                if (context is addExpenses){
+                    context.updateDialog(expensesList[position])
+                }
             }
 
         }
     }
 
-    fun setData(data:List<Todo> , context: Context ){
-
-        this.data = data
-        this.context = context
-
-        notifyDataSetChanged()
-
-    }
+//    fun setData(data:List<Todo> , context: Context ){
+//
+//        this.expensesList = data
+//
+//
+//        notifyDataSetChanged()
+//
+//    }
 
 
 }
