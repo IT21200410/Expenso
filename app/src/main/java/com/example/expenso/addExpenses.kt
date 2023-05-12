@@ -120,7 +120,7 @@ class addExpenses :BaseActivity() {
 
                 )
 
-            FireStoreClass().addExpensesType(this@addExpenses, expensesType)
+           // FireStoreClass().addExpensesType(this@addExpenses, expensesType)
 
 
         }
@@ -153,7 +153,7 @@ class addExpenses :BaseActivity() {
 
                 )
 
-            FireStoreClass().updateExpensesType(this@addExpenses, expensesType)
+            // FireStoreClass().updateExpensesType(this@addExpenses, expensesType)
 
 
         }

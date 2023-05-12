@@ -12,19 +12,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
+    <RadioGroup
+        android:id="@+id/rd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/ly"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height = "50dp"
+            android:textColor="@color/white"
+            android:text="INCOME"
+            android:gravity="center"
+            android:checked = "true"
+            android:button="@android:color/transparent"
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_left_selector"/>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height = "50dp"
+            android:textColor="@color/chat_gradient_start"
+            android:text="EXPENSE"
+            android:gravity="center"
+            android:button="@android:color/transparent"
+            android:layout_weight="1"/>
+
+
+
+
+
+
+    </RadioGroup>
     
     <LinearLayout
+        android:id="@+id/ly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/cardColor"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:paddingTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:paddingTop="10dp">
+        app:layout_constraintTop_toBottomOf="@id/rd">
 
         <com.google.android.material.textfield.TextInputLayout
             style = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
