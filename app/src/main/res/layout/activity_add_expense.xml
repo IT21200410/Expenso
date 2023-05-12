@@ -29,14 +29,13 @@
             android:id="@+id/rbLeft"
             android:layout_height = "50dp"
             android:textColor="@color/white"
-            android:text="INCOME"
+            android:text="EXPENSE"
             android:gravity="center"
             android:checked = "true"
             android:button="@android:color/transparent"
             android:layout_weight="1"
             android:background="@drawable/radio_button_left_selector"
             android:layout_marginStart="10dp"
-            android:onClick="onRadioButtonClicked"
             />
 
         <RadioButton
@@ -44,14 +43,13 @@
             android:id="@+id/rbRight"
             android:layout_height = "50dp"
             android:textColor="@color/chat_gradient_start"
-            android:text="EXPENSE"
+            android:text="INCOME"
             android:checked="false"
             android:gravity="center"
             android:button="@android:color/transparent"
             android:layout_weight="1"
             android:background="@drawable/radio_button_right_selector"
-            android:layout_marginEnd="10dp"
-            android:onClick="onRadioButtonClicked"/>
+            android:layout_marginEnd="10dp" />
     </RadioGroup>
     
     <LinearLayout

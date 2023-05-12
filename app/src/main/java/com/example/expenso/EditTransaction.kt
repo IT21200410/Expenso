@@ -21,6 +21,7 @@ class EditTransaction : BaseActivity() {
     private lateinit var note: EditText
     private lateinit var amount: EditText
     private lateinit var id:String
+    private lateinit var transactionType:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +39,12 @@ class EditTransaction : BaseActivity() {
         if ( transaction != null )
         {
             id = transaction.id
+            transactionType = transaction.transactionType
             date.setText(transaction.date)
             eType.setText(transaction.expenseType)
             note.setText(transaction.note)
             amount.setText(transaction.amount.toString())
+
         }
 
         val myCalendar = Calendar.getInstance()
@@ -119,6 +122,7 @@ class EditTransaction : BaseActivity() {
 
                 val transaction = Transaction(
                     id,
+                    transactionType,
                     date.text.toString().trim { it <= ' ' },
                     eType.text.toString().trim { it <= ' ' },
                     amount.text.toString().trim { it <= ' ' }.toDouble(),

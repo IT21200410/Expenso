@@ -1,7 +1,9 @@
 package com.example.expenso
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
@@ -23,6 +25,7 @@ import com.google.firebase.firestore.*
 import com.example.expenso.models.Transaction
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.ktx.toObject
 
 
 class Display_Transactions : AppCompatActivity()
@@ -114,7 +117,6 @@ class Display_Transactions : AppCompatActivity()
         addBtn.setOnClickListener{
             val intent  = Intent(this@Display_Transactions, AddExpense::class.java)
             startActivity(intent)
-            finish()
         }
 
         EventChangeListener()
@@ -124,46 +126,34 @@ class Display_Transactions : AppCompatActivity()
     private fun EventChangeListener()
     {
 
-//        listenerRegistration = mFireStore.collection(Constants.USERTRANSACTIONS)
-//            .document(FireStoreClass().getCurrentUserID()).collection(Constants.TRANSACTIONS)
-//            .addSnapshotListener(object: EventListener<QuerySnapshot>
-//                @SuppressLint("NotifyDataSetChanged")
-//                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-//                    if (error != null)
-//                    {
-//                        Log.e("Firestore error", error.message.toString())
-//                        return
-//                    }
-//
-//                    for( mFireStore: DocumentChange in value?.documentChanges!!)
-//                    {
-//                        if(mFireStore.type == DocumentChange.Type.ADDED)
-//                        {
-//                            transactionList.add(mFireStore.document.toObject(Transaction::class.java))
-//                        }
-//
-//                    }
-//                    transactionAdapter.notifyDataSetChanged()
-//
-//
-//
-//            })
-        mFireStore.collection(Constants.USERTRANSACTIONS)
-            .document(FireStoreClass().getCurrentUserID()).collection(Constants.TRANSACTIONS)
-            .get()
-            .addOnSuccessListener {
-                if( !it.isEmpty)
-                {
-                    for(data in it.documents){
-                        val transaction:Transaction? = data.toObject<Transaction>(Transaction::class.java)
-                        transactionList.add(transaction!!)
-                    }
-                    recyclerView.adapter = TransactionAdapter(this, transactionList)
-                }
-            }
-            .addOnFailureListener{
-                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
-            }
+      mFireStore.collection(Constants.USERTRANSACTIONS)
+          .document(FireStoreClass().getCurrentUserID())
+          .collection(Constants.TRANSACTIONS)
+          .addSnapshotListener(object: EventListener<QuerySnapshot>{
+              override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+
+                  if (error != null)
+                  {
+                      Log.e(TAG,"onEvent", error)
+                      return
+                  }
+                  if ( value != null && !value.isEmpty)
+                  {
+                      transactionList.clear()
+                      for(document in value.documents) {
+                          val data = document.toObject<Transaction>()
+                          transactionList.add(data!!)
+                      }
+
+                      transactionAdapter.notifyDataSetChanged()
+                  }
+                  else
+                  {
+                      Log.e(TAG, "onEvent: query snapshot was null")
+                  }
+              }
+
+          })
 
 
     }
@@ -177,11 +167,11 @@ class Display_Transactions : AppCompatActivity()
         return super.onOptionsItemSelected(item)
     }
 
-    fun updateSuccess(){
+    fun DeleteSuccess(){
         Toast.makeText(this, "Transaction deleted", Toast.LENGTH_SHORT).show()
     }
 
-    fun updateFail(){
+    fun DeleteFail(){
         Toast.makeText(this, "Couldn't delete transaction", Toast.LENGTH_SHORT).show()
     }
 
@@ -191,6 +181,7 @@ class Display_Transactions : AppCompatActivity()
         oldTransactions = transactionList
 
         FireStoreClass().deleteTransaction(this, deletedTransaction)
+
     }
 
 }

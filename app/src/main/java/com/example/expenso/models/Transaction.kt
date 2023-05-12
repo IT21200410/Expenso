@@ -5,12 +5,14 @@ import android.os.Parcelable
 
 data class Transaction(
     var id:String = "",
+    val transactionType:String = "",
     val date:String = "",
     val expenseType:String = "",
     val amount:Double = 0.0,
     val note:String = "",
 ): Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -21,6 +23,7 @@ data class Transaction(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
+        parcel.writeString(transactionType)
         parcel.writeString(date)
         parcel.writeString(expenseType)
         parcel.writeDouble(amount)
