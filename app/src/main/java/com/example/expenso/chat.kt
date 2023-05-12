@@ -14,7 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expenso.databinding.ActivityChatBinding
-import com.example.expenso.model.Message
+import com.example.expenso.models.Message
 import com.google.android.material.navigation.NavigationView
 import okhttp3.OkHttpClient
 

@@ -1,4 +1,4 @@
-package com.example.expenso.model
+package com.example.expenso.models
 
 data class Message(
     val message : String,

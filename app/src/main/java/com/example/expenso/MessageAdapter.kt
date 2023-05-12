@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-import com.example.expenso.model.Message
+import com.example.expenso.models.Message
 
 
 
