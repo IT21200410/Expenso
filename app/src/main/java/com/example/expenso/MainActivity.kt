@@ -3,6 +3,7 @@ package com.example.expenso
 import android.app.ActionBar
 import android.content.Intent
 import android.os.Bundle
+import android.provider.CalendarContract.Reminders
 import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
@@ -50,14 +51,15 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
                 R.id.nav_settings -> {
-                    startActivity(Intent(this, Settings::class.java))
+                    startActivity(Intent(this, Setting::class.java))
                     finish()
                 }
                 R.id.nav_chat -> {
                     startActivity(Intent(this, chat::class.java))
                 }
                 R.id.nav_reminders -> {
-                    startActivity(Intent(this,ReminderList::class.java))
+                    startActivity(Intent(this, Reminders::class.java))
+                    finish()
                 }
 
             }

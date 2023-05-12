@@ -126,7 +126,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/button_style"
-                android:text="@string/add_transaction"
+                android:text="@string/edit_transaction"
                 android:textColor="@color/white"/>
 
         </LinearLayout>

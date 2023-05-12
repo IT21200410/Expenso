@@ -30,7 +30,7 @@
     <string name="err_msg_enter_confirm_password">Please enter confirm password.</string>
     <string name="err_msg_password_and_confirm_password_mismatch">Password and confirm password does not match.</string>
 
-    <string name="please_wait">Please Wait ...</string>
+    <string name = "please_wait" >Please Wait ...</string>
 
     ----------------Add Transaction----------------
     <string name="new_transaction">New Transaction</string>
@@ -115,14 +115,11 @@
     <string name="type">Type</string>
     <string name="err_date">Please enter date</string>
     <string name="err_type">Select expense type</string>
-
     <string name="err_amount">Enter Amount</string>
     <string name="dashboard">Dashboard</string>
     <string name="transactions">Transactions</string>
     <string name="reminders">Reminders</string>
-    <string name="add_reminder">Add Reminder</string>
-    <string name="label">Type</string>
-    <string name="edit_reminder">Edit Reminder</string>
+    <string name="edit_transaction">EDIT TRANSACTION</string>
 
 
 </resources>

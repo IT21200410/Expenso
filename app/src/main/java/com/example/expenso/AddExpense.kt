@@ -2,7 +2,6 @@ package com.example.expenso
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
@@ -94,7 +93,9 @@ class AddExpense : BaseActivity() {
         eType.setAdapter(adapter)
 
         submitBtn.setOnClickListener {
-            validateRegisterDetails()
+            validateExpenseDetails()
+            startActivity(Intent(this@AddExpense, Display_Transactions::class.java))
+            finish()
         }
 
 
@@ -115,7 +116,7 @@ class AddExpense : BaseActivity() {
         Toast.makeText(this, "Transaction was not added", Toast.LENGTH_SHORT).show()
     }
 
-    private fun validateRegisterDetails():Boolean {
+    private fun validateExpenseDetails():Boolean {
         return when {
             TextUtils.isEmpty(date.text.toString().trim { it <= ' '}) -> {
                 showErrorSnackBar(resources.getString(R.string.err_date), true)
@@ -133,6 +134,7 @@ class AddExpense : BaseActivity() {
             else -> {
 
                 val transaction = Transaction(
+                    "",
                     date.text.toString().trim { it <= ' ' },
                     eType.text.toString().trim { it <= ' ' },
                     amount.text.toString().trim { it <= ' ' }.toDouble(),
