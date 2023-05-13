@@ -9,8 +9,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.expenso.firestore.FireStoreClass
+import com.example.expenso.models.ExpensesType
 import com.example.expenso.models.Transaction
+import com.example.expenso.utils.Constants
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,6 +25,8 @@ class EditTransaction : BaseActivity() {
     private lateinit var amount: EditText
     private lateinit var id:String
     private lateinit var transactionType:String
+    private lateinit var items:ArrayList<String>
+    private val mFireStore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +59,24 @@ class EditTransaction : BaseActivity() {
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateLabel(myCalendar)
         }
-        val items = listOf(
-            "Shopping",
-            "Gym",
-            "Fuel",
-            "Food"
-        )
+
+        if(transactionType == "Expense")
+        {
+            items = arrayListOf(
+                "Shopping",
+                "Gym",
+                "Fuel",
+                "Food"
+            )
+
+            getExpenseType()
+        }
+        else
+        {
+            items = arrayListOf(
+                "Salary"
+            )
+        }
 
         date.setOnClickListener {
             DatePickerDialog(
@@ -134,5 +151,27 @@ class EditTransaction : BaseActivity() {
             }
 
         }
+    }
+
+    private fun getExpenseType()
+    {
+        mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(FireStoreClass().getCurrentUserID())
+            .collection(Constants.EXPENSESL)
+            .get()
+            .addOnSuccessListener {
+                if(!it.isEmpty)
+                {
+                    for(data in it.documents){
+                        val expenseType: ExpensesType? = data.toObject<ExpensesType>(ExpensesType::class.java)
+                        items.add(expenseType?.expensesName!!)
+                    }
+
+                }
+            }
+            .addOnFailureListener{
+                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+            }
+
     }
 }
