@@ -65,7 +65,8 @@ class addExpenses :BaseActivity() {
         navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_dashboard -> {
-                    false
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                 }
                 R.id.nav_transactions -> {
                     startActivity(Intent(this, Display_Transactions::class.java))
@@ -73,13 +74,13 @@ class addExpenses :BaseActivity() {
                 }
                 R.id.nav_settings -> {
                     startActivity(Intent(this, Setting::class.java))
-                    finish()
                 }
                 R.id.nav_chat -> {
                     startActivity(Intent(this, chat::class.java))
+                    finish()
                 }
                 R.id.nav_reminders -> {
-                    startActivity(Intent(this, CalendarContract.Reminders::class.java))
+                    startActivity(Intent(this, add_reminder::class.java))
                     finish()
                 }
 

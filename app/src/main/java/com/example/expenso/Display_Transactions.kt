@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
@@ -38,17 +39,26 @@ class Display_Transactions : AppCompatActivity()
     private lateinit var addBtn: FloatingActionButton
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var deletedTransaction: Transaction
+    private lateinit var navigationView: NavigationView
+    private lateinit var usernameTextView: TextView
+    private lateinit var emailTextView: TextView
     private val mFireStore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_transactions)
 
+        navigationView = findViewById(R.id.nav_view)
+        val headerView = navigationView.getHeaderView(0)
+        usernameTextView = headerView.findViewById(R.id.user_name)
+        emailTextView = headerView.findViewById(R.id.email)
+
         // Variables related to recycler view
         recyclerView = findViewById(R.id.recyclerView)
         val layoutManager = LinearLayoutManager(this)
         layoutManager.isAutoMeasureEnabled = false
         recyclerView.layoutManager = layoutManager
+
 
 
         ///////////////////////////////////////
@@ -75,22 +85,20 @@ class Display_Transactions : AppCompatActivity()
 
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_background))
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
-        val navView : NavigationView = findViewById(R.id.nav_view)
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        navView.setNavigationItemSelectedListener {
+        navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_dashboard -> {
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
                 R.id.nav_transactions -> {
-                    startActivity(Intent(this, Display_Transactions::class.java))
-                    finish()
+                   false
                 }
                 R.id.nav_settings -> {
                     startActivity(Intent(this, Setting::class.java))
@@ -98,9 +106,11 @@ class Display_Transactions : AppCompatActivity()
                 }
                 R.id.nav_chat -> {
                     startActivity(Intent(this, chat::class.java))
+                    finish()
                 }
                 R.id.nav_reminders -> {
-                   false
+                    startActivity(Intent(this, add_reminder::class.java))
+                    finish()
                 }
 
             }
@@ -120,6 +130,7 @@ class Display_Transactions : AppCompatActivity()
         }
 
         EventChangeListener()
+        FireStoreClass().getUserDetails(this)
 
     }
 
@@ -182,6 +193,12 @@ class Display_Transactions : AppCompatActivity()
 
         FireStoreClass().deleteTransaction(this, deletedTransaction)
 
+    }
+
+    fun displayUser(username: String?, email:String?)
+    {
+        usernameTextView.text = username
+        emailTextView.text = email
     }
 
 }

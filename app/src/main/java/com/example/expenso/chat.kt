@@ -8,12 +8,14 @@ import android.provider.Settings
 import android.text.TextUtils
 import android.text.TextUtils.isEmpty
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expenso.databinding.ActivityChatBinding
+import com.example.expenso.firestore.FireStoreClass
 import com.example.expenso.models.Message
 import com.google.android.material.navigation.NavigationView
 import okhttp3.OkHttpClient
@@ -24,6 +26,9 @@ class chat : AppCompatActivity() {
     private lateinit var chat : ActivityChatBinding
     private lateinit var chatGptViewModel: chat_view
     private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var navigationView: NavigationView
+    private lateinit var usernameTextView: TextView
+    private lateinit var emailTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +39,17 @@ class chat : AppCompatActivity() {
 
         supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_background))
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
-        val navView : NavigationView = findViewById(R.id.nav_view)
+        navigationView = findViewById(R.id.nav_view)
+        val headerView = navigationView.getHeaderView(0)
+        usernameTextView = headerView.findViewById(R.id.user_name)
+        emailTextView = headerView.findViewById(R.id.email)
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        navView.setNavigationItemSelectedListener {
+        navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_dashboard -> {
                     startActivity(Intent(this, MainActivity::class.java))
@@ -94,6 +102,7 @@ class chat : AppCompatActivity() {
 
         }
 
+        FireStoreClass().getUserDetails(this)
 
     }
 
@@ -104,5 +113,11 @@ class chat : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun displayUser(username: String?, email:String?)
+    {
+        usernameTextView.text = username
+        emailTextView.text = email
     }
 }

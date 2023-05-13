@@ -16,8 +16,6 @@ import kotlinx.coroutines.tasks.await
 class FireStoreClass {
     private val mFireStore = FirebaseFirestore.getInstance()
 
-
-
     fun registerUser(activity: SignUpActivity,user: User)
     {
         mFireStore.collection(Constants.USERS)
@@ -59,6 +57,23 @@ class FireStoreClass {
                      is LoginActivity -> {
                          activity.userLoggedInSuccess(user!!)
                      }
+                     is MainActivity -> {
+                         activity.displayUser(user?.firstName, user?.email)
+                     }
+                     is Display_Transactions -> {
+                         activity.displayUser(user?.firstName, user?.email)
+                     }
+                     is Setting -> {
+                         activity.displayUser(user?.firstName, user?.lastName, user?.email)
+                     }
+                     is chat -> {
+                         activity.displayUser(user?.firstName, user?.email)
+                     }
+                     is UpdateProfile -> {
+                         activity.displayUser(user?.id, user?.firstName, user?.lastName, user?.email)
+                     }
+
+
                  }
 
              }
@@ -67,7 +82,20 @@ class FireStoreClass {
              }
     }
 
-    //Hello
+
+    fun updateUserDetails(activity: UpdateProfile, user: User)
+    {
+        val userRef = mFireStore.collection(Constants.USERS)
+            .document(getCurrentUserID())
+
+        userRef.set(user)
+            .addOnSuccessListener {
+                activity.updateSuccess()
+            }
+            .addOnFailureListener{e ->
+                activity.updateFail()
+            }
+    }
 
     fun addTransaction(activity: AddExpense, transaction: Transaction)
     {
