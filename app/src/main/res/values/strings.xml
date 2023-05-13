@@ -82,6 +82,7 @@
     <string name="about_us">About Us</string>
     <string name="expen">Add Expenses</string>
     <string name="Btn_add">Add Profile</string>
+    <string name="Btn_updateprofile">Update Profile</string>
 
     --------------dashboard_transaction---------------------
     <string name="all">All</string>
@@ -127,6 +128,10 @@
         *Built for easy, real-time tracking. And, sync across Android and the web to share your budget with your budgeting partners.
         *Keep everyone on the same page with household finances!</string>
     <string name="add_reminder">Add Reminder</string>
+    <string name="Balance">Balance</string>
+    <string name="value">$100000</string>
+    <string name="Total_income">Total Income</string>
+    <string name="Total_expense">Total expense</string>
     <string name="edit_reminder">Edit Reminder</string>
 
 </resources>

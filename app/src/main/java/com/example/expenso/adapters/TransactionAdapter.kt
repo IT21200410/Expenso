@@ -3,6 +3,7 @@ package com.example.expenso.adapters
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,16 @@ class TransactionAdapter(private val context: Context, private val transactionLi
         val amount = transaction.amount.toString()
         holder.tv1.text = transaction.expenseType
         holder.tv2.text = "$${amount}"
+
+        if (transaction.transactionType == "Expense")
+        {
+            holder.tv2.setTextColor(Color.RED)
+        }
+        else
+        {
+            holder.tv2.setTextColor(Color.GREEN)
+        }
+
         holder.tv3.text = transaction.date
 
         holder.card.setOnClickListener {
@@ -52,15 +63,6 @@ class TransactionAdapter(private val context: Context, private val transactionLi
             }
         }
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if(toggle.onOptionsItemSelected(item))
-//        {
-//            return true
-//        }
-//
-//        return super.onOptionsItemSelected(item)
-//    }
 
 }
 

@@ -2,14 +2,18 @@ package com.example.expenso
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.expenso.firestore.FireStoreClass
 import com.example.expenso.models.Transaction
@@ -18,7 +22,7 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddExpense : BaseActivity() {
+class AddExpense : BaseActivity(), View.OnClickListener{
 
     private lateinit var date: EditText
     private lateinit var submitBtn: Button
@@ -26,6 +30,8 @@ class AddExpense : BaseActivity() {
     private lateinit var note:EditText
     private lateinit var amount:EditText
     private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var rbLeft: RadioButton
+    private lateinit var rbRight: RadioButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +41,7 @@ class AddExpense : BaseActivity() {
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         val navView : NavigationView = findViewById(R.id.nav_view)
+
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -65,6 +72,12 @@ class AddExpense : BaseActivity() {
         eType = findViewById(R.id.typeInput)
         note = findViewById(R.id.noteInput)
         amount = findViewById(R.id.amountInput)
+        rbLeft = findViewById(R.id.rbLeft)
+        rbRight = findViewById(R.id.rbRight)
+
+        rbLeft.setOnClickListener(this)
+        rbRight.setOnClickListener(this)
+
         val myCalendar = Calendar.getInstance()
         val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
@@ -72,12 +85,16 @@ class AddExpense : BaseActivity() {
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateLabel(myCalendar)
         }
-        val items = listOf(
+
+        var items = listOf(
             "Shopping",
             "Gym",
             "Fuel",
             "Food"
         )
+        val adapter = ArrayAdapter(this, R.layout.dropdown, items)
+        eType.setAdapter(adapter)
+
 
         date.setOnClickListener {
             DatePickerDialog(
@@ -89,8 +106,6 @@ class AddExpense : BaseActivity() {
             ).show()
         }
 
-        val adapter = ArrayAdapter(this, R.layout.dropdown, items)
-        eType.setAdapter(adapter)
 
         submitBtn.setOnClickListener {
             validateExpenseDetails()
@@ -134,8 +149,20 @@ class AddExpense : BaseActivity() {
             }
             else -> {
 
+                var transactionType:String = ""
+
+                if (rbLeft.isChecked)
+                {
+                    transactionType = "Expense"
+                }
+                else
+                {
+                    transactionType = "Income"
+                }
+
                 val transaction = Transaction(
                     "",
+                    transactionType,
                     date.text.toString().trim { it <= ' ' },
                     eType.text.toString().trim { it <= ' ' },
                     amount.text.toString().trim { it <= ' ' }.toDouble(),
@@ -158,5 +185,40 @@ class AddExpense : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onClick(view: View?) {
+        if ( view is RadioButton)
+        {
+            if (view.isChecked)
+            {
+                when {
+                    view.id == R.id.rbLeft -> {
+                        rbLeft.setTextColor(Color.WHITE)
+                        rbRight.setTextColor(ContextCompat.getColor(this, R.color.chat_gradient_start))
+
+                        var items = listOf(
+                            "Shopping",
+                            "Gym",
+                            "Fuel",
+                            "Food"
+                        )
+
+                        val adapter = ArrayAdapter(this, R.layout.dropdown, items)
+                        eType.setAdapter(adapter)
+                    }
+                    view.id == R.id.rbRight -> {
+                        rbRight.setTextColor(Color.WHITE)
+                        rbLeft.setTextColor(ContextCompat.getColor(this, R.color.chat_gradient_start))
+
+                        var items = listOf(
+                            "Salary"
+                        )
+
+                        val adapter = ArrayAdapter(this, R.layout.dropdown, items)
+                        eType.setAdapter(adapter)
+                    }
+                }
+            }
+        }
+    }
 
 }

@@ -18,8 +18,6 @@ import kotlinx.coroutines.tasks.await
 class FireStoreClass {
     private val mFireStore = FirebaseFirestore.getInstance()
 
-
-
     fun registerUser(activity: SignUpActivity,user: User)
     {
         mFireStore.collection(Constants.USERS)
@@ -61,12 +59,41 @@ class FireStoreClass {
                      is LoginActivity -> {
                          activity.userLoggedInSuccess(user!!)
                      }
+                     is MainActivity -> {
+                         activity.displayUser(user?.firstName, user?.email)
+                     }
+                     is Display_Transactions -> {
+                         activity.displayUser(user?.firstName, user?.email)
+                     }
+                     is Setting -> {
+                         activity.displayUser(user?.firstName, user?.lastName, user?.email)
+                     }
+                     is chat -> {
+                         activity.displayUser(user?.firstName, user?.email)
+                     }
+                     is UpdateProfile -> {
+                         activity.displayUser(user?.id, user?.firstName, user?.lastName, user?.email)
+                     }
+
+
                  }
 
              }
-             .addOnFailureListener{e ->
+    }
 
-             }
+
+    fun updateUserDetails(activity: UpdateProfile, user: User)
+    {
+        val userRef = mFireStore.collection(Constants.USERS)
+            .document(getCurrentUserID())
+
+        userRef.set(user)
+            .addOnSuccessListener {
+                activity.updateSuccess()
+            }
+            .addOnFailureListener{e ->
+                activity.updateFail()
+            }
     }
 
     //Hello
@@ -102,6 +129,49 @@ class FireStoreClass {
                     documentRef.set(transaction)
                         .addOnSuccessListener {
                            activity.updateSuccess()
+
+                        }
+                        .addOnFailureListener{e ->
+                            activity.updateFail()
+                        }
+
+                }
+            }
+            .addOnFailureListener{e ->
+                Log.w("Fail", "Couldn't edit", e)
+            }
+    }
+    fun addExpensesType(activity: addExpenses, expense: ExpensesType)
+    {
+        val expensesData = mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(getCurrentUserID()).collection(Constants.EXPENSESL)
+
+        val newExpensesRef = expensesData.document().toString()
+        expense.id = newExpensesRef
+
+        expensesData.add(expense)
+            .addOnSuccessListener {
+                activity.expensesSuccess()
+            }
+            .addOnFailureListener{
+                activity.expensesFail()
+            }
+
+    }
+
+    fun updateExpensesType(activity: addExpenses, expenses: ExpensesType)
+    {
+        val expensesRef = mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(getCurrentUserID()).collection(Constants.EXPENSESL)
+
+        expensesRef.whereEqualTo("id", expenses.id)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val documentRef = expensesRef.document(document.id)
+                    documentRef.set(expenses)
+                        .addOnSuccessListener {
+                            activity.updateSuccess()
                         }
                         .addOnFailureListener{e ->
                             activity.updateFail()
@@ -124,6 +194,30 @@ class FireStoreClass {
             .addOnSuccessListener { documents ->
                 for(document in documents){
                     val documentRef = transactionRef.document(document.id).delete()
+                        .addOnSuccessListener {
+                            activity.DeleteSuccess()
+                        }
+                        .addOnFailureListener{e ->
+                            activity.DeleteFail()
+                        }
+
+                }
+            }
+            .addOnFailureListener{e ->
+                Log.w("Fail", "Couldn't edit", e)
+            }
+    }
+
+    fun deleteExpensesType(activity: addExpenses, expenses: ExpensesType)
+    {
+        val expensesRef = mFireStore.collection(Constants.EXPENSESTYPE)
+            .document(getCurrentUserID()).collection(Constants.EXPENSESL)
+
+        expensesRef.whereEqualTo("id", expenses.id)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val documentRef = expensesRef.document(document.id).delete()
                         .addOnSuccessListener {
                             activity.updateSuccess()
                         }
@@ -204,5 +298,43 @@ class FireStoreClass {
                 Log.w("Fail", "Couldn't edit", e)
             }
     }
+
+    fun getDashboardStatistics(activity: MainActivity)
+    {
+        var totalExpense = 0.0
+        var totalIncome = 0.0
+        var totalBalance = 0.0
+        var amount = 0.0
+
+        mFireStore.collection(Constants.USERTRANSACTIONS)
+            .document(getCurrentUserID()).collection(Constants.TRANSACTIONS)
+            .get()
+            .addOnSuccessListener { documents ->
+
+                for(document in documents){
+
+                    amount = document.getDouble("amount")!!
+
+                    if ( document.getString("transactionType") == "Income")
+                    {
+                        totalIncome += amount
+                    }
+                    else
+                    {
+                        totalExpense += amount
+                    }
+
+                }
+
+                totalBalance = totalIncome - totalExpense
+                activity.updateDashboard(totalIncome, totalExpense, totalBalance)
+
+            }
+            .addOnFailureListener{e ->
+
+            }
+    }
+
+
 
 }

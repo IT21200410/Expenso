@@ -25,6 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/email"
         android:textSize="16dp"
         android:text="robinsingla@gmail.com"/>
 

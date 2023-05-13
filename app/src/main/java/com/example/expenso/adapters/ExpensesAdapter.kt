@@ -10,21 +10,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expenso.R
 import com.example.expenso.addExpenses
-import com.example.expenso.database.TodoDatabase
-import com.example.expenso.database.entities.Todo
-import com.example.expenso.database.repositories.ExpensesRepository
 import com.example.expenso.models.ExpensesType
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ExpensesAdapter(private val context: Context, private val expensesList:ArrayList<ExpensesType>):RecyclerView.Adapter<ExpensesAdapter.VH>()
 {
-
-
-
-
 
     class VH(view: View):RecyclerView.ViewHolder(view)
     {
@@ -52,19 +41,12 @@ class ExpensesAdapter(private val context: Context, private val expensesList:Arr
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.cbTodo.text = expensesList[position].expensesName
-        holder.ivDelete.setOnClickListener(){
+        holder.ivDelete.setOnClickListener{
 
             if(holder.cbTodo.isChecked){
-//                val repository = ExpensesRepository(TodoDatabase.getInstance(context))
-//
-//                CoroutineScope(Dispatchers.IO ).launch {
-//                    repository.delete(expensesList[position])
-//                    //
-//                withContext(Dispatchers.Main){
-//                    var data = repository.getAllTodos()
-//                    setData(data,context)
-             //   }
-               // }
+            if (context is addExpenses){
+                context.deleteExpenseType(expensesList[position])
+            }
             }
         else
             {

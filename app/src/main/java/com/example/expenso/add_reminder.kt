@@ -79,7 +79,7 @@ class add_reminder : BaseActivity() {
 
                 )
 
-                FireStoreClass().addReminder(this@add_reminder, reminder)
+               // FireStoreClass().addReminder(this@add_reminder, reminder)
                 true
             }
 
