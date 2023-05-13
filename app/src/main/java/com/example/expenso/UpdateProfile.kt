@@ -49,10 +49,10 @@ class UpdateProfile : BaseActivity() {
     }
 
     fun updateSuccess(){
-        Toast.makeText(this, "Transaction edited", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show()
     }
 
     fun updateFail(){
-        Toast.makeText(this, "Couldn't edit transaction", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Couldn't edit profile", Toast.LENGTH_SHORT).show()
     }
 }
