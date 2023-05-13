@@ -33,9 +33,6 @@
             android:exported="true"
             android:theme="@style/Theme.Expenso2" />
         <activity
-            android:name=".add_profile"
-            android:exported="false" />
-        <activity
             android:name=".Display_Transactions"
             android:exported="true"
             android:theme="@style/Theme.Expenso2" />

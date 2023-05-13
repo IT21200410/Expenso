@@ -6,8 +6,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +21,7 @@ import com.example.expenso.firestore.FireStoreClass
 import com.example.expenso.models.Reminder
 import com.example.expenso.models.Transaction
 import com.example.expenso.utils.Constants
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.toObject
 
@@ -28,6 +33,10 @@ class ReminderList : AppCompatActivity() {
     private lateinit var reminderAdapter: ReminderAdapter
     private lateinit var  deletedReminder : Reminder
     private lateinit var addButton: Button
+    private lateinit var navigationView: NavigationView
+    private lateinit var usernameTextView: TextView
+    private lateinit var emailTextView: TextView
+    private lateinit var toggle: ActionBarDrawerToggle
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +47,11 @@ class ReminderList : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 1)
         addButton = findViewById(R.id.btn_add)
         reminderList = ArrayList()
+        navigationView = findViewById(R.id.nav_view)
+        val headerView = navigationView.getHeaderView(0)
+        usernameTextView = headerView.findViewById(R.id.user_name)
+        emailTextView = headerView.findViewById(R.id.email)
+
 
         reminderAdapter = ReminderAdapter(this,reminderList)
         recyclerView.adapter = reminderAdapter
@@ -66,6 +80,42 @@ class ReminderList : AppCompatActivity() {
 
         val swipeHelper = ItemTouchHelper(touchHelper)
         swipeHelper.attachToRecyclerView(recyclerView)
+
+        supportActionBar?.setBackgroundDrawable(resources.getDrawable(R.drawable.gradient_background))
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
+
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        navigationView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.nav_dashboard -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+                R.id.nav_transactions -> {
+                    startActivity(Intent(this, Display_Transactions::class.java))
+                    finish()
+                }
+                R.id.nav_settings -> {
+                    startActivity(Intent(this, Setting::class.java))
+                    finish()
+                }
+                R.id.nav_chat -> {
+                    startActivity(Intent(this, chat::class.java))
+                    finish()
+                }
+                R.id.nav_reminders -> {
+                    false
+                }
+
+            }
+
+            true
+        }
+
 
     }
 
@@ -143,6 +193,13 @@ class ReminderList : AppCompatActivity() {
         Toast.makeText(this, "Can't delete Reminder", Toast.LENGTH_SHORT).show()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item))
+        {
+            return true
+        }
 
+        return super.onOptionsItemSelected(item)
+    }
 
     }

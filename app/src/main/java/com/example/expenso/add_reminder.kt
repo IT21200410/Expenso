@@ -6,11 +6,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.expenso.firestore.FireStoreClass
 import com.example.expenso.models.Reminder
+import com.google.android.material.navigation.NavigationView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,10 +30,10 @@ class add_reminder : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_reminder)
 
-         addReminderBtn  = findViewById(R.id.btn_add)
-         labelInput  = findViewById(R.id.labelInput)
-         dateInput  = findViewById(R.id.DateInput)
-         amountInput  = findViewById(R.id.amountInput)
+        labelInput  = findViewById(R.id.labelInput)
+        dateInput  = findViewById(R.id.DateInput)
+        amountInput  = findViewById(R.id.amountInput)
+        addReminderBtn  = findViewById(R.id.btn_add)
 
         val myCalendar = Calendar.getInstance()
         val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
@@ -51,6 +56,8 @@ class add_reminder : BaseActivity() {
         addReminderBtn.setOnClickListener(){
             validateReminderDetails()
         }
+
+
     }
 
     private fun validateReminderDetails():Boolean {
@@ -102,4 +109,5 @@ class add_reminder : BaseActivity() {
         dateInput.setText(sdf.format(myCalendar.time))
 
     }
+
 }
