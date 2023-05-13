@@ -115,7 +115,7 @@ class ReminderList : AppCompatActivity() {
 
             true
         }
-
+        FireStoreClass().getUserDetails(this)
 
     }
 
@@ -153,24 +153,6 @@ class ReminderList : AppCompatActivity() {
                 }
 
             })
-
-//        fireStore.collection(Constants.USERREMINDERS)
-//            .document(FireStoreClass().getCurrentUserID()).collection(Constants.REMINDER)
-//            .get()
-//            .addOnSuccessListener {
-//                if (!it.isEmpty) {
-//                    reminderList.clear() // clear the list before adding updated reminders
-//                    for (data in it.documents) {
-//                        val reminder: Reminder? = data.toObject<Reminder>(Reminder::class.java)
-//                        reminderList.add(reminder!!)
-//                    }
-//                    recyclerView.adapter = ReminderAdapter(this, reminderList)
-//                    reminderAdapter.notifyDataSetChanged() // notify adapter for data change
-//                }
-//            }
-//            .addOnFailureListener{
-//                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
-//            }
     }
 
     private fun deleteReminder(reminder: Reminder)
@@ -179,9 +161,9 @@ class ReminderList : AppCompatActivity() {
         oldReminder = reminderList
 
         FireStoreClass().deleteReminder(this, deletedReminder)
-        val index = reminderList.indexOf(reminder)
-        reminderList.removeAt(index)
-        reminderAdapter.notifyItemRemoved(index)
+//        val index = reminderList.indexOf(reminder)
+//        reminderList.removeAt(index)
+//        reminderAdapter.notifyItemRemoved(index)
 //        EventChangeListener()
     }
 
@@ -200,6 +182,11 @@ class ReminderList : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+    fun displayUser(username: String?, email:String?)
+    {
+        usernameTextView.text = username
+        emailTextView.text = email
     }
 
     }

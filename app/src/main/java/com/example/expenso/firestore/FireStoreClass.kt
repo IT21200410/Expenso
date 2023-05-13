@@ -74,7 +74,9 @@ class FireStoreClass {
                      is UpdateProfile -> {
                          activity.displayUser(user?.id, user?.firstName, user?.lastName, user?.email)
                      }
-
+                     is ReminderList ->{
+                         activity.displayUser(user?.firstName, user?.email)
+                     }
 
                  }
 
