@@ -50,7 +50,7 @@ class ExpensesAdapter(private val context: Context, private val expensesList:Arr
             }
         else
             {
-                Toast.makeText(context,"Cannot delete unchecked todo item", Toast.LENGTH_LONG ).show()
+                Toast.makeText(context,"Cannot delete unchecked expenses item", Toast.LENGTH_LONG ).show()
             }
             holder.ivEdit.setOnClickListener{
                 if (context is addExpenses){

@@ -227,7 +227,7 @@ class addExpenses :BaseActivity() {
 //update
 
     fun updateSuccess() {
-        Toast.makeText(this, "Expenses Type edited", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Expenses Type updated", Toast.LENGTH_SHORT).show()
     }
 
     fun updateFail() {
