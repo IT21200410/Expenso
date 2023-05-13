@@ -1,5 +1,6 @@
 package com.example.expenso
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -35,8 +36,8 @@ class EditReminder : BaseActivity() {
 
         if (reminder != null) {
             id = reminder.id
-            labelInput.setText(reminder.type)
-            dateInput.setText(reminder.date)
+            labelInput.setText(reminder.date)
+            dateInput.setText(reminder.type)
             amountInput.setText(reminder.amount.toString())
         }
 
@@ -99,6 +100,10 @@ class EditReminder : BaseActivity() {
                 )
 
                 FireStoreClass().updateReminder(this@EditReminder, reminder)
+                val intent = Intent(this@EditReminder, ReminderList::class.java)
+                intent.putExtra("reminder", reminder)
+                setResult(Activity.RESULT_OK, intent)
+                finish()
                 true
             }
         }

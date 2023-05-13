@@ -18,9 +18,9 @@ class ReminderAdapter(private val context: Context, private val reminderList:Arr
 
     class ReminderViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
     {
-        val tv1: TextView = itemView.findViewById(R.id.rec_Title)
-        val tv2: TextView = itemView.findViewById(R.id.recLang)
-        val tv3: TextView = itemView.findViewById(R.id.recDesc)
+        val title: TextView = itemView.findViewById(R.id.rec_Title)
+        val amount: TextView = itemView.findViewById(R.id.recLang)
+        val date: TextView = itemView.findViewById(R.id.recDesc)
         val card: CardView = itemView.findViewById(R.id.recCard)
 
     }
@@ -37,9 +37,9 @@ class ReminderAdapter(private val context: Context, private val reminderList:Arr
     override fun onBindViewHolder(holder: ReminderViewHolder, position: Int) {
         val reminder = reminderList[position]
         val amount = reminder.amount.toString()
-        holder.tv1.text = reminder.type
-        holder.tv2.text = "$${amount}"
-        holder.tv3.text = reminder.date
+        holder.title.text = reminder.type
+        holder.amount.text = "$${amount}"
+        holder.date.text = reminder.date
 
         holder.card.setOnClickListener {
             val intent = Intent(context, EditReminder::class.java)

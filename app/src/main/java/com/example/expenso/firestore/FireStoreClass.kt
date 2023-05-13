@@ -181,4 +181,28 @@ class FireStoreClass {
             }
     }
 
+    fun deleteReminder(activity: ReminderList, reminder: Reminder)
+    {
+        val reminderRef = mFireStore.collection(Constants.USERREMINDERS)
+            .document(getCurrentUserID()).collection(Constants.REMINDER)
+
+        reminderRef.whereEqualTo("id", reminder.id)
+            .get()
+            .addOnSuccessListener { documents ->
+                for(document in documents){
+                    val documentRef = reminderRef.document(document.id).delete()
+                        .addOnSuccessListener {
+                            activity.deleteSuccess()
+                        }
+                        .addOnFailureListener{e ->
+                            activity.deleteFail()
+                        }
+
+                }
+            }
+            .addOnFailureListener{e ->
+                Log.w("Fail", "Couldn't edit", e)
+            }
+    }
+
 }

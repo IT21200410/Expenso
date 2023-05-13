@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="80dp"
             android:layout_height="30dp"
-            android:id="@+id/recLang"
+            android:id="@+id/amount"
             android:text="amount"
             android:textColor="@color/colorSnackBarError"
             android:textSize="16sp"
